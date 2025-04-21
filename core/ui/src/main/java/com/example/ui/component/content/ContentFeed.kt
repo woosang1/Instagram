@@ -30,6 +30,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
@@ -48,6 +49,7 @@ import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.ui.component.video.VideoPlayer
+import kotlin.math.abs
 
 @Composable
 fun ContentFeed(
@@ -170,10 +172,16 @@ fun ContentFeed(
 fun MediaHorizontalList(mediaItems: List<MediaItem>) {
     val listState = rememberLazyListState()
 
-    // 현재 페이지 및 미디어 추적
-    val currentPage by remember {
+    // 가장 중앙에 가까운 아이템 인덱스를 찾기
+    val centeredIndex by remember {
         derivedStateOf {
-            listState.layoutInfo.visibleItemsInfo.firstOrNull()?.index ?: 0
+            val layoutInfo = listState.layoutInfo
+            val viewportCenter = layoutInfo.viewportEndOffset / 2
+
+            layoutInfo.visibleItemsInfo.minByOrNull { item ->
+                val itemCenter = item.offset + item.size / 2
+                abs(itemCenter - viewportCenter)
+            }?.index ?: 0
         }
     }
 
@@ -195,20 +203,47 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
                         .fillParentMaxHeight()
                         .aspectRatio(1f)
                 ) {
-                    when (media) {
-                        is MediaItem.Image -> {
+                    if (index == centeredIndex) {
+                        // 중심 아이템일 경우
+                        when (media) {
+                            is MediaItem.Image -> {
+                                AsyncImage(
+                                    model = media.url,
+                                    contentDescription = "Image",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+
+                            is MediaItem.Video -> {
+                                VideoPlayer(videoUrl = media.url)
+                            }
+                        }
+                    } else {
+                        // 중심 외의 아이템은 이미지 또는 썸네일로만 보여줌
+                        if (media is MediaItem.Image) {
                             AsyncImage(
                                 model = media.url,
                                 contentDescription = "Image",
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier.fillMaxSize()
                             )
-                        }
-                        is MediaItem.Video -> {
-                            VideoPlayer(
-                                videoUrl = media.url,
-                                playWhenReady = index == currentPage // 현재 보이는 비디오만 재생
-                            )
+                        } else {
+                            // 영상의 경우도 그냥 이미지처럼 썸네일 대체
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(LocalColors.current.black)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.PlayArrow,
+                                    contentDescription = "Play",
+                                    tint = LocalColors.current.white,
+                                    modifier = Modifier
+                                        .align(Alignment.Center)
+                                        .size(48.dp)
+                                )
+                            }
                         }
                     }
                 }
@@ -225,7 +260,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
                     shape = CircleShape
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp),
-            text = "${currentPage + 1} / ${mediaItems.size}",
+            text = "${centeredIndex + 1} / ${mediaItems.size}",
             color = LocalColors.current.white,
             style = LocalTypography.current.body1
         )
