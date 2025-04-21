@@ -1,8 +1,10 @@
 package com.example.ui.component.content
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -35,6 +38,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -163,6 +167,7 @@ fun ContentFeed(
 fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
     val listState = rememberLazyListState()
 
+    // 현재 페이지 추적
     val currentPage by remember {
         derivedStateOf {
             listState.layoutInfo.visibleItemsInfo.firstOrNull()?.index?.plus(1) ?: 1
@@ -178,7 +183,8 @@ fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
             state = listState,
             modifier = Modifier
                 .fillMaxSize()
-                .clipToBounds()
+                .clipToBounds(),
+            flingBehavior = rememberSnapFlingBehavior(lazyListState = listState) // 한 장씩 넘어가게 설정
         ) {
             items(thumbnailUrls.size) { index ->
                 AsyncImage(
@@ -186,12 +192,13 @@ fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
                     contentDescription = "Post Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .fillParentMaxWidth()
-                        .aspectRatio(1f)
+                        .fillParentMaxHeight()
+                        .aspectRatio(1f) // 비율 맞추기
                 )
             }
         }
 
+        // 페이지 인디케이터
         Text(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
@@ -207,3 +214,4 @@ fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
         )
     }
 }
+
