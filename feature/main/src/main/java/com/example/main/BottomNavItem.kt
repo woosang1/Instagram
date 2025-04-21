@@ -1,17 +1,17 @@
 package com.example.main
 
 import com.example.navigation.MainRoute
+import com.example.resource.R as ResourceR
 
 data class BottomNavItem(
     val route: MainRoute,
-//    val icon: ImageVector,
-    val label: String
+    val iconResId: Int,
 )
 
 val bottomNavItems = listOf(
-    BottomNavItem(MainRoute.Home, "홈"),
-    BottomNavItem(MainRoute.Shorts, "Shorts"),
-    BottomNavItem(MainRoute.Upload, ""),
-    BottomNavItem(MainRoute.Subscribe, "구독"),
-    BottomNavItem(MainRoute.MyPage, "내 페이지")
+    BottomNavItem(MainRoute.Home, ResourceR.drawable.home),
+    BottomNavItem(MainRoute.Shorts, ResourceR.drawable.search),
+    BottomNavItem(MainRoute.Upload, ResourceR.drawable.plus),
+    BottomNavItem(MainRoute.Subscribe, ResourceR.drawable.video),
+    BottomNavItem(MainRoute.MyPage, ResourceR.drawable.home)
 )
