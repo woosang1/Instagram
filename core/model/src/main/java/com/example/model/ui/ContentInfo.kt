@@ -1,7 +1,7 @@
 package com.example.model.ui
 
 data class ContentInfo(
-    val thumbnailUrls: List<String>,
+    val thumbnails: List<MediaItem>,
     val channelThumbnailUrl: String,
     val title: String,
     val channelName: String,

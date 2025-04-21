@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -45,6 +46,8 @@ import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
+import com.example.model.ui.MediaItem
+import com.example.ui.component.video.VideoPlayer
 
 @Composable
 fun ContentFeed(
@@ -108,7 +111,7 @@ fun ContentFeed(
             }
         }
 
-        ThumbnailHorizontalList(thumbnailUrls = contentInfo.thumbnailUrls)
+        MediaHorizontalList(mediaItems = contentInfo.thumbnails)
 
         // 아이콘 바 (좋아요, 댓글, 공유)
         Row(
@@ -164,13 +167,13 @@ fun ContentFeed(
 }
 
 @Composable
-fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
+fun MediaHorizontalList(mediaItems: List<MediaItem>) {
     val listState = rememberLazyListState()
 
-    // 현재 페이지 추적
+    // 현재 페이지 및 미디어 추적
     val currentPage by remember {
         derivedStateOf {
-            listState.layoutInfo.visibleItemsInfo.firstOrNull()?.index?.plus(1) ?: 1
+            listState.layoutInfo.visibleItemsInfo.firstOrNull()?.index ?: 0
         }
     }
 
@@ -184,17 +187,31 @@ fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
             modifier = Modifier
                 .fillMaxSize()
                 .clipToBounds(),
-            flingBehavior = rememberSnapFlingBehavior(lazyListState = listState) // 한 장씩 넘어가게 설정
+            flingBehavior = rememberSnapFlingBehavior(listState)
         ) {
-            items(thumbnailUrls.size) { index ->
-                AsyncImage(
-                    model = thumbnailUrls[index],
-                    contentDescription = "Post Image",
-                    contentScale = ContentScale.Crop,
+            itemsIndexed(mediaItems) { index, media ->
+                Box(
                     modifier = Modifier
                         .fillParentMaxHeight()
-                        .aspectRatio(1f) // 비율 맞추기
-                )
+                        .aspectRatio(1f)
+                ) {
+                    when (media) {
+                        is MediaItem.Image -> {
+                            AsyncImage(
+                                model = media.url,
+                                contentDescription = "Image",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+                        is MediaItem.Video -> {
+                            VideoPlayer(
+                                videoUrl = media.url,
+                                playWhenReady = index == currentPage // 현재 보이는 비디오만 재생
+                            )
+                        }
+                    }
+                }
             }
         }
 
@@ -208,7 +225,7 @@ fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
                     shape = CircleShape
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp),
-            text = "$currentPage / ${thumbnailUrls.size}",
+            text = "${currentPage + 1} / ${mediaItems.size}",
             color = LocalColors.current.white,
             style = LocalTypography.current.body1
         )
