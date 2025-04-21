@@ -30,11 +30,11 @@ Jetpack Compose 기반의 **유튜브 클론 앱**입니다. 최신 안드로이
 
 ## Screenshots
 <p align="center">
-  <img src="screenshots/1.png" width="500" alt="1">
+  <img src="screenshots/1.jpg" width="250" alt="1">
+  <img src="screenshots/2.jpg" width="250" alt="2">
 </p>
 <p align="center">
-  <img src="screenshots/2.png" width="250" alt="2">
-  <img src="screenshots/3.jpeg" width="250" alt="3">
-  <img src="screenshots/4.jpeg" width="250" alt="4">
+ 
+  <img src="screenshots/3.png" width="500" alt="3">
 </p>
 
