@@ -1,14 +1,15 @@
 package com.example.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.example.model.ui.ContentInfo
-import com.example.ui.component.content.ContentCard
+import com.example.ui.component.content.ContentFeed
 
 @Composable
 internal fun HomeContent() {
@@ -48,11 +49,14 @@ internal fun HomeContent() {
         state = listState
     ) {
         items(sectionList) { section ->
-            ContentCard(
+            ContentFeed(
+                modifier = Modifier
+                    .padding(top = 8.dp),
                 contentInfo = section,
-                onClick = {
-                    // TODO: 클릭 이벤트 처리
-                }
+                onProfileClick = {},
+                onLikeClick = {},
+                onCommentClick = {},
+                onShareClick = {}
             )
         }
     }
