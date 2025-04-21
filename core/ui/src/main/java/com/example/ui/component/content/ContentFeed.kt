@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,6 +21,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
@@ -29,15 +30,17 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
-import com.example.utils.extension.noRippleClickable
 
 @Composable
 fun ContentFeed(
@@ -101,16 +104,7 @@ fun ContentFeed(
             }
         }
 
-
-        // 본문 썸네일
-        AsyncImage(
-            model = contentInfo.thumbnailUrl,
-            contentDescription = "Post Thumbnail",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-        )
+        ThumbnailHorizontalList(thumbnailUrls = contentInfo.thumbnailUrls)
 
         // 아이콘 바 (좋아요, 댓글, 공유)
         Row(
@@ -162,5 +156,54 @@ fun ContentFeed(
             overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
+@Composable
+fun ThumbnailHorizontalList(thumbnailUrls: List<String>) {
+    val listState = rememberLazyListState()
+
+    val currentPage by remember {
+        derivedStateOf {
+            listState.layoutInfo.visibleItemsInfo.firstOrNull()?.index?.plus(1) ?: 1
+        }
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+    ) {
+        LazyRow(
+            state = listState,
+            modifier = Modifier
+                .fillMaxSize()
+                .clipToBounds()
+        ) {
+            items(thumbnailUrls.size) { index ->
+                AsyncImage(
+                    model = thumbnailUrls[index],
+                    contentDescription = "Post Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillParentMaxWidth()
+                        .aspectRatio(1f)
+                )
+            }
+        }
+
+        Text(
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(8.dp)
+                .background(
+                    color = LocalColors.current.black.copy(alpha = 0.6f),
+                    shape = CircleShape
+                )
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+            text = "$currentPage / ${thumbnailUrls.size}",
+            color = LocalColors.current.white,
+            style = LocalTypography.current.body1
+        )
     }
 }
