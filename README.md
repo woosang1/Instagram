@@ -1,4 +1,4 @@
-# 📺 YouPlay Compose
+# 📺 Instagram Compose
 
 Jetpack Compose 기반의 **유튜브 클론 앱**입니다. 최신 안드로이드 기술 스택을 활용하여 동영상 리스트, 재생, 검색 등 핵심 기능을 구현하였습니다.
 
