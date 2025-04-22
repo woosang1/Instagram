@@ -13,32 +13,40 @@ import com.example.navigation.MainRoute
 import com.example.shorts.navigation.navigationShorts
 import com.example.subscribe.navigation.navigationSubscribe
 import com.example.upload.navigation.navigationUpload
+import com.example.utils.log.DebugLog
 
 internal class MainNavigator(
     val navController: NavHostController,
 ) {
-    private val currentDestination: NavDestination?
-        @Composable get() = navController
-            .currentBackStackEntryAsState().value?.destination
 
     fun navigateHome() {
-        navController.navigationHome()
+        if (navController.currentDestination?.route.toString().contains(MainRoute.Home::class.simpleName.toString()).not()) {
+            navController.navigationHome()
+        }
     }
 
     fun navigateShorts() {
-        navController.navigationShorts()
+        if (navController.currentDestination?.route.toString().contains(MainRoute.Shorts::class.simpleName.toString()).not()) {
+            navController.navigationShorts()
+        }
     }
 
     fun navigateUpload() {
-        navController.navigationUpload()
+        if (navController.currentDestination?.route.toString().contains(MainRoute.Upload::class.simpleName.toString()).not()) {
+            navController.navigationUpload()
+        }
     }
 
     fun navigateSubscribe() {
-        navController.navigationSubscribe()
+        if (navController.currentDestination?.route.toString().contains(MainRoute.Subscribe::class.simpleName.toString()).not()) {
+            navController.navigationSubscribe()
+        }
     }
 
     fun navigateMyPage() {
-        navController.navigationMypage()
+        if (navController.currentDestination?.route.toString().contains(MainRoute.MyPage::class.simpleName.toString()).not()) {
+            navController.navigationMypage()
+        }
     }
 
     fun popBackStackIfNotHome() {

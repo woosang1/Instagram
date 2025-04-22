@@ -89,8 +89,6 @@ fun VideoPlayer(
         }
     }
 
-
-
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
