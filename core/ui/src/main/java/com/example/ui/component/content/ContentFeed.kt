@@ -237,7 +237,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>, isShowingItem: Boolean) {
                                         .padding(end = 8.dp, bottom = 8.dp),
                                     isMuted = media.isMute,
                                     onToggleVolume = {
-                                        // TODO: 여기 state로 관리 들어가면됨. 
+                                        // TODO: 여기 state로 관리 들어가면됨.
                                         media.isMute = !media.isMute
                                     }
                                 )
