@@ -20,6 +20,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
+import com.example.utils.log.DebugLog
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -29,6 +30,11 @@ fun VideoPlayer(
     isMute: Boolean = true,
     onReadyState: () -> Unit
 ) {
+    DebugLog("VideoPlayer")
+
+    DebugLog("isAutoPlay : ${isAutoPlay}")
+    DebugLog("isMute : ${isMute}")
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 

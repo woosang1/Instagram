@@ -48,8 +48,7 @@ internal fun HomeContent(
                 .fillMaxWidth(),
             state = listState
         ) {
-            DebugLog("centerIndex.value : ${centerIndex.value}")
-            itemsIndexed(uiState.contentList) { index, section ->
+            itemsIndexed(uiState.contentList, key = { index, section -> section.id }) { index, section ->
                 ContentFeed(
                     modifier = Modifier
                         .padding(top = 8.dp),
