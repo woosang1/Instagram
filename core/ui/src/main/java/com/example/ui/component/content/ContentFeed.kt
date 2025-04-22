@@ -1,6 +1,5 @@
 package com.example.ui.component.content
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -23,24 +22,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -49,7 +44,14 @@ import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.ui.component.video.VideoPlayer
-import kotlin.math.abs
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
+import com.example.utils.log.DebugLog
+import kotlinx.coroutines.flow.filter
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
+import com.example.resource.R as ResourceR
 
 @Composable
 fun ContentFeed(
@@ -85,12 +87,13 @@ fun ContentFeed(
                     .clickable { onProfileClick() }
             ) {
                 AsyncImage(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(CircleShape),
                     model = contentInfo.channelThumbnailUrl,
                     contentDescription = "Channel Thumbnail",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .clip(CircleShape)
+                    placeholder = painterResource(ResourceR.drawable.placeholder)
                 )
             }
 
@@ -171,18 +174,15 @@ fun ContentFeed(
 @Composable
 fun MediaHorizontalList(mediaItems: List<MediaItem>) {
     val listState = rememberLazyListState()
+    var currentPage by remember { mutableIntStateOf(0) }
 
-    // 가장 중앙에 가까운 아이템 인덱스를 찾기
-    val centeredIndex by remember {
-        derivedStateOf {
-            val layoutInfo = listState.layoutInfo
-            val viewportCenter = layoutInfo.viewportEndOffset / 2
-
-            layoutInfo.visibleItemsInfo.minByOrNull { item ->
-                val itemCenter = item.offset + item.size / 2
-                abs(itemCenter - viewportCenter)
-            }?.index ?: 0
-        }
+    LaunchedEffect(listState) {
+        snapshotFlow { listState.isScrollInProgress }
+            .filter { isScrolling -> !isScrolling }
+            .collect {
+                currentPage = listState.firstVisibleItemIndex
+                DebugLog("현재 보고 있는 페이지: $currentPage")
+            }
     }
 
     Box(
@@ -203,47 +203,18 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
                         .fillParentMaxHeight()
                         .aspectRatio(1f)
                 ) {
-                    if (index == centeredIndex) {
-                        // 중심 아이템일 경우
-                        when (media) {
-                            is MediaItem.Image -> {
-                                AsyncImage(
-                                    model = media.url,
-                                    contentDescription = "Image",
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier.fillMaxSize()
-                                )
-                            }
-
-                            is MediaItem.Video -> {
-                                VideoPlayer(videoUrl = media.url)
-                            }
-                        }
-                    } else {
-                        // 중심 외의 아이템은 이미지 또는 썸네일로만 보여줌
-                        if (media is MediaItem.Image) {
+                    when (media) {
+                        is MediaItem.Image -> {
                             AsyncImage(
+                                modifier = Modifier.fillMaxSize(),
                                 model = media.url,
                                 contentDescription = "Image",
                                 contentScale = ContentScale.Crop,
-                                modifier = Modifier.fillMaxSize()
                             )
-                        } else {
-                            // 영상의 경우도 그냥 이미지처럼 썸네일 대체
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(LocalColors.current.black)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.PlayArrow,
-                                    contentDescription = "Play",
-                                    tint = LocalColors.current.white,
-                                    modifier = Modifier
-                                        .align(Alignment.Center)
-                                        .size(48.dp)
-                                )
-                            }
+                        }
+
+                        is MediaItem.Video -> {
+                            VideoPlayer(videoUrl = media.url, autoPlay = currentPage == index)
                         }
                     }
                 }
@@ -260,7 +231,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
                     shape = CircleShape
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp),
-            text = "${centeredIndex + 1} / ${mediaItems.size}",
+            text = "${currentPage + 1} / ${mediaItems.size}",
             color = LocalColors.current.white,
             style = LocalTypography.current.body1
         )

@@ -17,28 +17,29 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 
 @Composable
-fun VideoPlayer(videoUrl: String) {
+fun VideoPlayer(
+    videoUrl: String,
+    autoPlay: Boolean = true
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    // ExoPlayer는 remember로 구성
     val exoPlayer = remember(videoUrl) {
         ExoPlayer.Builder(context).build().apply {
             val mediaItem = MediaItem.fromUri(videoUrl)
             setMediaItem(mediaItem)
             prepare()
-            playWhenReady = true
+            playWhenReady = autoPlay
         }
     }
 
-// Lifecycle-aware 플레이어 정지 및 해제
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
-                Lifecycle.Event.ON_PAUSE -> exoPlayer.pause() // 백그라운드로 갔을 때 정지
+                Lifecycle.Event.ON_PAUSE -> exoPlayer.pause()
                 Lifecycle.Event.ON_DESTROY -> {
                     exoPlayer.stop()
-                    exoPlayer.release() // Composable이 사라질 때 플레이어 해제
+                    exoPlayer.release()
                 }
                 else -> {}
             }

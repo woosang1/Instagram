@@ -44,9 +44,9 @@ internal fun HomeContent() {
         ),
         ContentInfo(
             thumbnails = listOf(
-                MediaItem.Image("https://www.mk.co.kr/news/photos/11271822"),
-                MediaItem.Image("https://secretfantasy.tistory.com/216"),
-                MediaItem.Image("https://hdgallery.tistory.com/553")
+                MediaItem.Image("https://cdn.seoulwire.com/news/photo/202407/615343_816176_94.jpg"),
+                MediaItem.Image("https://cdn.baccro.com/news/photo/201808/16499_40463_042.jpg"),
+                MediaItem.Image("https://dimg.donga.com/wps/NEWS/IMAGE/2024/11/27/130512780.1.jpg")
             ),
             channelThumbnailUrl = "https://www.mk.co.kr/news/photos/11271822",
             title = "아이린의 봄 분위기 물씬 나는 스타일링",
