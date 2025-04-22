@@ -10,8 +10,8 @@ data class BottomNavItem(
 
 val bottomNavItems = listOf(
     BottomNavItem(MainRoute.Home, ResourceR.drawable.home),
-    BottomNavItem(MainRoute.Shorts, ResourceR.drawable.search),
+    BottomNavItem(MainRoute.Search, ResourceR.drawable.search),
     BottomNavItem(MainRoute.Upload, ResourceR.drawable.plus),
-    BottomNavItem(MainRoute.Subscribe, ResourceR.drawable.video),
+    BottomNavItem(MainRoute.Shorts, ResourceR.drawable.video),
     BottomNavItem(MainRoute.MyPage, ResourceR.drawable.home)
 )

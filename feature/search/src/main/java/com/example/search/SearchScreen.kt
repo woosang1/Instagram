@@ -1,4 +1,4 @@
-package com.example.subscribe
+package com.example.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.example.designsystem.theme.LocalColors
 
 @Composable
-fun SubScribeScreen(
+fun SearchScreen(
 ) {
     Box(
         modifier = Modifier

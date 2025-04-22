@@ -43,7 +43,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:shorts"))
     implementation(project(":feature:upload"))
-    implementation(project(":feature:subscribe"))
+    implementation(project(":feature:search"))
     implementation(project(":feature:myPage"))
 
     implementation(project(":core:ui"))

@@ -1,4 +1,4 @@
-package com.example.subscribe
+package com.example.search
 
 import org.junit.Test
 

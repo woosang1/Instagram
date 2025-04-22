@@ -2,18 +2,15 @@ package com.example.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.home.navigation.navigationHome
 import com.example.mypage.navigation.navigationMypage
 import com.example.navigation.MainRoute
+import com.example.search.navigation.navigationSearch
 import com.example.shorts.navigation.navigationShorts
-import com.example.subscribe.navigation.navigationSubscribe
 import com.example.upload.navigation.navigationUpload
-import com.example.utils.log.DebugLog
 
 internal class MainNavigator(
     val navController: NavHostController,
@@ -25,9 +22,9 @@ internal class MainNavigator(
         }
     }
 
-    fun navigateShorts() {
-        if (navController.currentDestination?.route.toString().contains(MainRoute.Shorts::class.simpleName.toString()).not()) {
-            navController.navigationShorts()
+    fun navigateSearch() {
+        if (navController.currentDestination?.route.toString().contains(MainRoute.Search::class.simpleName.toString()).not()) {
+            navController.navigationSearch()
         }
     }
 
@@ -37,9 +34,9 @@ internal class MainNavigator(
         }
     }
 
-    fun navigateSubscribe() {
-        if (navController.currentDestination?.route.toString().contains(MainRoute.Subscribe::class.simpleName.toString()).not()) {
-            navController.navigationSubscribe()
+    fun navigateShorts() {
+        if (navController.currentDestination?.route.toString().contains(MainRoute.Shorts::class.simpleName.toString()).not()) {
+            navController.navigationShorts()
         }
     }
 

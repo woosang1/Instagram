@@ -14,5 +14,7 @@ fun ShortsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(LocalColors.current.gray)
-    )
+    ) {
+        ShortContent()
+    }
 }

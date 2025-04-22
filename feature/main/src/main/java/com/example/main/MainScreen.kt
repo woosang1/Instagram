@@ -3,11 +3,8 @@ package com.example.main
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,9 +27,9 @@ fun MainScreen() {
                 onTabSelected = { route ->
                     when (route) {
                         is MainRoute.Home -> mainNavigator.navigateHome()
-                        is MainRoute.Shorts -> mainNavigator.navigateShorts()
+                        is MainRoute.Search -> mainNavigator.navigateSearch()
                         is MainRoute.Upload -> mainNavigator.navigateUpload()
-                        is MainRoute.Subscribe -> mainNavigator.navigateSubscribe()
+                        is MainRoute.Shorts -> mainNavigator.navigateShorts()
                         is MainRoute.MyPage -> mainNavigator.navigateMyPage()
                     }
                 }

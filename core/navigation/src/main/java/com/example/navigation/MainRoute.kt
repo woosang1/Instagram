@@ -8,13 +8,13 @@ sealed interface MainRoute {
     data object Home : MainRoute
 
     @Serializable
-    data object Shorts : MainRoute
+    data object Search : MainRoute
 
     @Serializable
     data object Upload : MainRoute
 
     @Serializable
-    data object Subscribe : MainRoute
+    data object Shorts : MainRoute
 
     @Serializable
     data object MyPage : MainRoute
