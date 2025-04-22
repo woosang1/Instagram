@@ -2,6 +2,7 @@ package com.example.ui.component.video
 
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -15,9 +16,12 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 
+@OptIn(UnstableApi::class)
 @Composable
 fun VideoPlayer(
     videoUrl: String,
@@ -73,8 +77,6 @@ fun VideoPlayer(
         }
     }
 
-
-
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
@@ -103,6 +105,7 @@ fun VideoPlayer(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 )
+                resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
             }
         },
         modifier = Modifier.fillMaxSize()
