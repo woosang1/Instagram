@@ -96,8 +96,7 @@ fun ContentFeed(
                         .clip(CircleShape),
                     model = contentInfo.channelThumbnailUrl,
                     contentDescription = "Channel Thumbnail",
-                    contentScale = ContentScale.Crop,
-                    placeholder = painterResource(ResourceR.drawable.placeholder)
+                    contentScale = ContentScale.Crop
                 )
             }
 
@@ -226,6 +225,7 @@ fun MediaHorizontalList(
                                 model = media.url,
                                 contentDescription = "Image",
                                 contentScale = ContentScale.Crop,
+                                placeholder = painterResource(ResourceR.drawable.placeholder)
                             )
                         }
 
