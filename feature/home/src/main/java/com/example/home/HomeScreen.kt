@@ -25,6 +25,9 @@ fun HomeScreen(
             .fillMaxSize()
             .background(LocalColors.current.black)
     ) {
-        HomeContent(state)
+        HomeContent(
+            state = state,
+            onEvent = onEvent
+        )
     }
 }

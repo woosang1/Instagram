@@ -34,6 +34,7 @@ fun VideoPlayer(
 
     val exoPlayer = remember(videoUrl) {
         ExoPlayer.Builder(context).build().apply {
+            repeatMode = Player.REPEAT_MODE_ONE
             addListener(object : Player.Listener {
                 override fun onPlaybackStateChanged(state: Int) {
                     when (state) {

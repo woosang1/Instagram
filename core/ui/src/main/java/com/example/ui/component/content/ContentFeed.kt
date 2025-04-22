@@ -61,7 +61,8 @@ fun ContentFeed(
     onProfileClick: () -> Unit,
     onLikeClick: () -> Unit,
     onCommentClick: () -> Unit,
-    onShareClick: () -> Unit
+    onShareClick: () -> Unit,
+    onMuteClick: (contentId: String, mediaId: String) -> Unit,
 ) {
     DebugLog("isShowingItem : ${isShowingItem}")
 
@@ -120,8 +121,10 @@ fun ContentFeed(
         }
 
         MediaHorizontalList(
+            contentId = contentInfo.id,
             mediaItems = contentInfo.thumbnails,
-            isShowingItem = isShowingItem
+            isShowingItem = isShowingItem,
+            onMuteClick = onMuteClick
         )
 
         // 아이콘 바 (좋아요, 댓글, 공유)
@@ -178,7 +181,12 @@ fun ContentFeed(
 }
 
 @Composable
-fun MediaHorizontalList(mediaItems: List<MediaItem>, isShowingItem: Boolean) {
+fun MediaHorizontalList(
+    contentId: String,
+    mediaItems: List<MediaItem>,
+    isShowingItem: Boolean,
+    onMuteClick: (contentId: String, mediaId: String) -> Unit
+    ) {
     val listState = rememberLazyListState()
     var currentPage by remember { mutableIntStateOf(0) }
 
@@ -237,8 +245,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>, isShowingItem: Boolean) {
                                         .padding(end = 8.dp, bottom = 8.dp),
                                     isMuted = media.isMute,
                                     onToggleVolume = {
-                                        // TODO: 여기 state로 관리 들어가면됨.
-                                        media.isMute = !media.isMute
+                                        onMuteClick(contentId, media.id)
                                     }
                                 )
                             }

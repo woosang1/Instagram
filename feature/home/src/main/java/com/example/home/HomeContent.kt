@@ -12,15 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import com.example.home.common.HomeEvent
 import com.example.home.common.HomeState
 import com.example.home.common.HomeUiState
-import com.example.model.ui.ContentInfo
-import com.example.model.ui.MediaItem
 import com.example.ui.component.content.ContentFeed
+import com.example.utils.log.DebugLog
 
 @Composable
 internal fun HomeContent(
-    state: HomeState
+    state: HomeState,
+    onEvent: (HomeEvent) -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -47,6 +48,7 @@ internal fun HomeContent(
                 .fillMaxWidth(),
             state = listState
         ) {
+            DebugLog("centerIndex.value : ${centerIndex.value}")
             itemsIndexed(uiState.contentList) { index, section ->
                 ContentFeed(
                     modifier = Modifier
@@ -56,7 +58,10 @@ internal fun HomeContent(
                     onProfileClick = {},
                     onLikeClick = {},
                     onCommentClick = {},
-                    onShareClick = {}
+                    onShareClick = {},
+                    onMuteClick = { contentId, mediaId ->
+                        onEvent(HomeEvent.ClickMuteIcon(contentId = contentId, mediaId = mediaId))
+                    }
                 )
             }
         }
