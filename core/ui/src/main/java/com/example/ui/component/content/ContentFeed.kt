@@ -229,7 +229,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
         // 페이지 인디케이터
         Text(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
+                .align(Alignment.TopEnd)
                 .padding(8.dp)
                 .background(
                     color = LocalColors.current.black.copy(alpha = 0.6f),
