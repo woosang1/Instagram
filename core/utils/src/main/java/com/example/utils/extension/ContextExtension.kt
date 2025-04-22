@@ -1,10 +1,12 @@
 package com.example.utils.extension
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
+import android.media.MediaMetadataRetriever
 import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -47,6 +49,22 @@ fun Context.getWidthDisplay(): Int {
 fun Context.getHeightDisplay(): Int {
     val metrics = resources.displayMetrics
     return metrics.heightPixels
+}
+
+/**
+ * 비디오 썸네일 추출
+ */
+fun Context.getVideoThumbnail(videoUrl: String, timeMs: Long = 1000): Bitmap? {
+    val retriever = MediaMetadataRetriever()
+    return try {
+        retriever.setDataSource(videoUrl, HashMap())
+        retriever.getFrameAtTime(timeMs * 1000) // 마이크로초 단위
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    } finally {
+        retriever.release()
+    }
 }
 
 /**

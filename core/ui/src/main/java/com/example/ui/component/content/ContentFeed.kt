@@ -198,6 +198,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
             flingBehavior = rememberSnapFlingBehavior(listState)
         ) {
             itemsIndexed(mediaItems) { index, media ->
+                val isSelected = (currentPage == index)
                 Box(
                     modifier = Modifier
                         .fillParentMaxHeight()
@@ -214,7 +215,11 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
                         }
 
                         is MediaItem.Video -> {
-                            VideoPlayer(videoUrl = media.url, autoPlay = currentPage == index)
+                            VideoPlayer(
+                                videoUrl = media.url,
+                                isAutoPlay = isSelected,
+                                onReadyState = {}
+                            )
                         }
                     }
                 }
