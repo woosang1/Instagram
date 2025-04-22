@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import com.example.home.common.HomeEvent
 import com.example.home.common.HomeState
 import com.example.home.common.HomeUiState
+import com.example.home.common.Section
+import com.example.home.layout.StoryList
 import com.example.ui.component.content.ContentFeed
 import com.example.utils.log.DebugLog
 
@@ -48,20 +50,27 @@ internal fun HomeContent(
                 .fillMaxWidth(),
             state = listState
         ) {
-            itemsIndexed(uiState.contentList, key = { index, section -> section.id }) { index, section ->
-                ContentFeed(
-                    modifier = Modifier
-                        .padding(top = 8.dp),
-                    isShowingItem = (centerIndex.value == index),
-                    contentInfo = section,
-                    onProfileClick = {},
-                    onLikeClick = {},
-                    onCommentClick = {},
-                    onShareClick = {},
-                    onMuteClick = { contentId, mediaId ->
-                        onEvent(HomeEvent.ClickMuteIcon(contentId = contentId, mediaId = mediaId))
+            itemsIndexed(uiState.section) { index, section ->
+                when(section){
+                    is Section.Story -> {
+                        StoryList(stories = section.storyList)
                     }
-                )
+                    is Section.Feed -> {
+                        ContentFeed(
+                            modifier = Modifier
+                                .padding(top = 8.dp),
+                            isShowingItem = (centerIndex.value == index),
+                            contentInfo = section.contentInfo,
+                            onProfileClick = {},
+                            onLikeClick = {},
+                            onCommentClick = {},
+                            onShareClick = {},
+                            onMuteClick = { contentId, mediaId ->
+                                onEvent(HomeEvent.ClickMuteIcon(contentId = contentId, mediaId = mediaId))
+                            }
+                        )
+                    }
+                }
             }
         }
     }

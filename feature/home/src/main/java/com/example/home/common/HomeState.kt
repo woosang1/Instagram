@@ -14,7 +14,7 @@ data class HomeState(
 sealed interface HomeUiState {
     data object Loading : HomeUiState
     data class Content(
-        val contentList: List<ContentInfo>
+        val section: List<Section>
     ) : HomeUiState
     data object Error : HomeUiState
 }
