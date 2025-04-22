@@ -64,6 +64,7 @@ fun ContentFeed(
     onShareClick: () -> Unit
 ) {
     DebugLog("isShowingItem : ${isShowingItem}")
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -221,11 +222,26 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>, isShowingItem: Boolean) {
                         }
 
                         is MediaItem.Video -> {
-                            VideoPlayer(
-                                videoUrl = media.url,
-                                isAutoPlay = isAutoPlay,
-                                onReadyState = {}
-                            )
+                            Box(
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                VideoPlayer(
+                                    videoUrl = media.url,
+                                    isAutoPlay = isAutoPlay,
+                                    isMute = media.isMute,
+                                    onReadyState = {}
+                                )
+                                VolumeToggleButton(
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 8.dp, bottom = 8.dp),
+                                    isMuted = media.isMute,
+                                    onToggleVolume = {
+                                        // TODO: 여기 state로 관리 들어가면됨. 
+                                        media.isMute = !media.isMute
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -248,4 +264,3 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>, isShowingItem: Boolean) {
         )
     }
 }
-

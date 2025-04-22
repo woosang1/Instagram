@@ -26,6 +26,7 @@ import androidx.media3.ui.PlayerView
 fun VideoPlayer(
     videoUrl: String,
     isAutoPlay: Boolean = true,
+    isMute: Boolean = true,
     onReadyState: () -> Unit
 ) {
     val context = LocalContext.current
@@ -68,6 +69,10 @@ fun VideoPlayer(
         exoPlayer.prepare()
     }
 
+    LaunchedEffect(isMute) {
+        exoPlayer.volume = if (isMute) 0f else 1f
+    }
+
     LaunchedEffect(isAutoPlay) {
         exoPlayer.playWhenReady = isAutoPlay
         if (isAutoPlay) {
@@ -76,6 +81,8 @@ fun VideoPlayer(
             exoPlayer.pause()
         }
     }
+
+
 
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->

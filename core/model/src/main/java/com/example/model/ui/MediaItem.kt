@@ -1,6 +1,6 @@
 package com.example.model.ui
 
-sealed class MediaItem(val url: String) {
-    class Image(url: String) : MediaItem(url)
-    class Video(url: String) : MediaItem(url)
+sealed class MediaItem(open val url: String) {
+    data class Image(override val url: String) : MediaItem(url)
+    data class Video(override val url: String, var isMute: Boolean = true) : MediaItem(url)
 }
