@@ -56,12 +56,14 @@ import com.example.resource.R as ResourceR
 @Composable
 fun ContentFeed(
     modifier: Modifier = Modifier,
+    isShowingItem: Boolean,
     contentInfo: ContentInfo,
     onProfileClick: () -> Unit,
     onLikeClick: () -> Unit,
     onCommentClick: () -> Unit,
     onShareClick: () -> Unit
 ) {
+    DebugLog("isShowingItem : ${isShowingItem}")
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -116,7 +118,10 @@ fun ContentFeed(
             }
         }
 
-        MediaHorizontalList(mediaItems = contentInfo.thumbnails)
+        MediaHorizontalList(
+            mediaItems = contentInfo.thumbnails,
+            isShowingItem = isShowingItem
+        )
 
         // 아이콘 바 (좋아요, 댓글, 공유)
         Row(
@@ -172,7 +177,7 @@ fun ContentFeed(
 }
 
 @Composable
-fun MediaHorizontalList(mediaItems: List<MediaItem>) {
+fun MediaHorizontalList(mediaItems: List<MediaItem>, isShowingItem: Boolean) {
     val listState = rememberLazyListState()
     var currentPage by remember { mutableIntStateOf(0) }
 
@@ -199,6 +204,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
         ) {
             itemsIndexed(mediaItems) { index, media ->
                 val isSelected = (currentPage == index)
+                val isAutoPlay = (isSelected && isShowingItem)
                 Box(
                     modifier = Modifier
                         .fillParentMaxHeight()
@@ -217,7 +223,7 @@ fun MediaHorizontalList(mediaItems: List<MediaItem>) {
                         is MediaItem.Video -> {
                             VideoPlayer(
                                 videoUrl = media.url,
-                                isAutoPlay = isSelected,
+                                isAutoPlay = isAutoPlay,
                                 onReadyState = {}
                             )
                         }
