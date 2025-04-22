@@ -47,5 +47,8 @@ internal fun ShortView(index: Int) {
             contentScale = ContentScale.Crop,
             placeholder = painterResource(ResourceR.drawable.placeholder)
         )
+        ShortOverlayUI(
+            modifier = Modifier.align(Alignment.BottomEnd)
+        )
     }
 }
