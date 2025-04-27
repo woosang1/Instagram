@@ -2,6 +2,7 @@ package com.example.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -49,6 +50,7 @@ fun BottomNavigationBar(
     onTabSelected: (MainRoute) -> Unit
 ) {
     NavigationBar(
+        modifier = Modifier.height(56.dp),
         containerColor = LocalColors.current.black,
         contentColor = LocalColors.current.white
     ) {

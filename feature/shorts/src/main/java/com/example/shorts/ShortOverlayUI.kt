@@ -25,8 +25,8 @@ import com.example.designsystem.theme.LocalTypography
 @Composable
 fun ShortOverlayUI(
     modifier: Modifier = Modifier,
-    title: String = "카리나",
-    description: String = "이 영상 진짜 대박이야! 🔥🔥",
+    title: String,
+    description: String,
     onLikeClick: () -> Unit = {},
     onCommentClick: () -> Unit = {},
     onShareClick: () -> Unit = {}

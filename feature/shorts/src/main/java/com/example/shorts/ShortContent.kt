@@ -3,46 +3,99 @@ package com.example.shorts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
+import com.example.model.ui.ContentInfo
+import com.example.model.ui.MediaItem
+import com.example.shorts.common.testList
+import com.example.ui.component.video.VideoPlayer
+import com.example.utils.extension.getHeightDisplay
+import com.example.utils.extension.pxToDp
 import com.example.resource.R as ResourceR
 
 @Composable
-internal fun ShortContent(
-) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        items(10) { index ->
-            ShortView(index)
-        }
+internal fun ShortContent() {
+    val pagerState = rememberPagerState(pageCount = { testList.size })
+    val currentPage = pagerState.currentPage
+
+    VerticalPager(
+        state = pagerState,
+        modifier = Modifier.fillMaxSize(),
+    ) { pageIndex ->
+        ShortView(
+            index = pageIndex,
+            isSelectPage = (currentPage == pageIndex),
+            model = testList[pageIndex]
+        )
     }
 }
 
 @Composable
-internal fun ShortView(index: Int) {
+internal fun ShortView(index: Int, isSelectPage: Boolean, model: ContentInfo) {
+    val context = LocalContext.current
+    // 상단탭 높이 48 / 바텀탭 높이 56
+    val shortsHeight = context.getHeightDisplay().pxToDp() - 48 - 56
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .height(shortsHeight.dp)
             .background(LocalColors.current.blue),
         contentAlignment = Alignment.Center
     ) {
-        AsyncImage(
-            modifier = Modifier.fillMaxSize(),
-            model = "https://images.openai.com/thumbnails/12a2b47b847ffbd5fc39dbca23e49043.jpeg",
-            contentDescription = "Image",
-            contentScale = ContentScale.Crop,
-            placeholder = painterResource(ResourceR.drawable.placeholder)
-        )
+        val thumbnails = model.thumbnails.first()
+        if (isSelectPage) {
+            when (thumbnails) {
+                is MediaItem.Image -> {
+                    AsyncImage(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        model = thumbnails.imageUrl,
+                        contentDescription = "Image",
+                        contentScale = ContentScale.Crop,
+                        placeholder = painterResource(ResourceR.drawable.placeholder)
+                    )
+                }
+
+                is MediaItem.Video -> {
+                    VideoPlayer(
+                        thumbnailsUrl = thumbnails.thumbnailsUrl,
+                        videoUrl = thumbnails.videoUrl,
+                        isAutoPlay = true,
+                        isMute = false
+                    )
+                }
+            }
+
+        } else {
+            val imageUrl =  when (thumbnails) {
+                is MediaItem.Image -> thumbnails.imageUrl
+                is MediaItem.Video -> thumbnails.thumbnailsUrl
+            }
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize(),
+                model = imageUrl,
+                contentDescription = "Image",
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(ResourceR.drawable.placeholder)
+            )
+        }
+
         ShortOverlayUI(
-            modifier = Modifier.align(Alignment.BottomEnd)
+            modifier = Modifier.align(Alignment.BottomEnd),
+            title = model.title,
+            description = model.description
         )
     }
 }

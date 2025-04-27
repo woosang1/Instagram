@@ -92,7 +92,7 @@ fun ContentFeed(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(CircleShape),
-                    model = contentInfo.channelThumbnailUrl,
+                    model = contentInfo.profileUrl,
                     contentDescription = "Channel Thumbnail",
                     contentScale = ContentScale.Crop
                 )
@@ -102,7 +102,7 @@ fun ContentFeed(
 
             //  채널 이름
             Text(
-                text = contentInfo.channelName,
+                text = contentInfo.profileName,
                 color = LocalColors.current.white,
                 style = LocalTypography.current.body1,
                 modifier = Modifier.weight(1f)
@@ -178,7 +178,7 @@ fun ContentFeed(
 }
 
 @Composable
-fun MediaHorizontalList(
+internal fun MediaHorizontalList(
     contentId: String,
     mediaItems: List<MediaItem>,
     isShowingItem: Boolean,

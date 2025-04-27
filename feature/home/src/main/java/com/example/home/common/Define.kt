@@ -72,9 +72,9 @@ val testContentList = listOf(
                 imageUrl = "https://images.openai.com/thumbnails/12a2b47b847ffbd5fc39dbca23e49043.jpeg"
             )
         ),
-        channelThumbnailUrl = "https://i.namu.wiki/i/2yoJvN6w-fUtbpz4fWqY_wn7B1tuLADIGM5YVTOJY5qaO0JwqlWzpuv-X3GRzUGcnzvnp9KOS6wn5x_4EJo0yQ.webp",
+        profileUrl = "https://i.namu.wiki/i/2yoJvN6w-fUtbpz4fWqY_wn7B1tuLADIGM5YVTOJY5qaO0JwqlWzpuv-X3GRzUGcnzvnp9KOS6wn5x_4EJo0yQ.webp",
         title = "카리나의 새로운 솔로곡 'Up' 무대 비하인드",
-        channelName = "Karina Official",
+        profileName = "Karina Official",
         viewCount = "1.5M",
         timeAgo = "2시간 전"
     ),
@@ -95,9 +95,9 @@ val testContentList = listOf(
                 imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7N6uPq6jrh6AToZM-qN7oiEq2xGS4LZs3YHb3FJOjRlTbaLdGJoYFAhscrcUkFNObc8VzRY"
             )
         ),
-        channelThumbnailUrl = "https://iuedelweiss.tistory.com/258",
+        profileUrl = "https://iuedelweiss.tistory.com/258",
         title = "아이유의 생일 기념 고화질 화보 모음",
-        channelName = "IU Official",
+        profileName = "IU Official",
         viewCount = "2.3M",
         timeAgo = "5시간 전"
     ),
@@ -117,9 +117,9 @@ val testContentList = listOf(
                 imageUrl = "https://dimg.donga.com/wps/NEWS/IMAGE/2024/11/27/130512780.1.jpg"
             )
         ),
-        channelThumbnailUrl = "https://www.mk.co.kr/news/photos/11271822",
+        profileUrl = "https://www.mk.co.kr/news/photos/11271822",
         title = "아이린의 봄 분위기 물씬 나는 스타일링",
-        channelName = "Irene Channel",
+        profileName = "Irene Channel",
         viewCount = "1.1M",
         timeAgo = "1일 전"
     ),
@@ -139,9 +139,9 @@ val testContentList = listOf(
                 "https://images.mypetlife.co.kr/content/uploads/2021/10/19151330/corgi-g1a1774f95_1280-1024x682.jpg"
             )
         ),
-        channelThumbnailUrl = "https://www.mk.co.kr/news/photos/11271822",
+        profileUrl = "https://www.mk.co.kr/news/photos/11271822",
         title = "강아지",
-        channelName = "Irene Channel",
+        profileName = "Irene Channel",
         viewCount = "1.1M",
         timeAgo = "1일 전"
     ),
