@@ -11,20 +11,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.MoreVert
@@ -32,9 +27,18 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -43,15 +47,11 @@ import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.ui.component.video.VideoPlayer
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import com.example.utils.log.DebugLog
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.ui.res.painterResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
-import com.example.resource.R as ResourceR
 import kotlin.math.abs
+import com.example.resource.R as ResourceR
 
 @Composable
 fun ContentFeed(
@@ -128,7 +128,7 @@ fun ContentFeed(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 8.dp),
+                .padding(horizontal = 2.dp, vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onLikeClick) {
@@ -192,9 +192,7 @@ fun MediaHorizontalList(
             .distinctUntilChanged()
             .collect { isScrolling ->
                 if (!isScrolling) {
-                    // Snap 애니메이션이 완전히 끝나도록 살짝 delay
-                    delay(80) // 이 값은 필요시 조절 가능
-
+                    delay(80)
                     val layoutInfo = listState.layoutInfo
                     val visibleItems = layoutInfo.visibleItemsInfo
                     val center = layoutInfo.viewportStartOffset + layoutInfo.viewportEndOffset / 2
@@ -205,8 +203,7 @@ fun MediaHorizontalList(
                     }
 
                     closestItem?.index?.let {
-                        currentPage.value = it
-                        DebugLog("🎯 Snap 이후 확정된 currentPage: $it")
+                        currentPage.intValue = it
                     }
                 }
             }

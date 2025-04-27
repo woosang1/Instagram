@@ -9,7 +9,6 @@ import androidx.compose.ui.Modifier
 import com.example.designsystem.theme.LocalColors
 import com.example.home.common.HomeEvent
 import com.example.home.common.HomeState
-import com.example.utils.log.DebugLog
 
 @Composable
 fun HomeScreen(

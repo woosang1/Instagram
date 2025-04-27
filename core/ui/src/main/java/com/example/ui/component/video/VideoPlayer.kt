@@ -1,6 +1,5 @@
 package com.example.ui.component.video
 
-import android.provider.MediaStore.Images.Thumbnails
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.OptIn

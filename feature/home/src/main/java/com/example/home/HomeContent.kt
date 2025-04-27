@@ -3,7 +3,6 @@ package com.example.home
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -19,7 +18,6 @@ import com.example.home.common.HomeUiState
 import com.example.home.common.Section
 import com.example.home.layout.StoryList
 import com.example.ui.component.content.ContentFeed
-import com.example.utils.log.DebugLog
 
 @Composable
 internal fun HomeContent(
