@@ -7,14 +7,10 @@ val testList = listOf(
     ContentInfo(
         id = "1",
         thumbnails = listOf(
-            MediaItem.Image(
-                id = "img1",
-                imageUrl = "https://images.openai.com/thumbnails/12a2b47b847ffbd5fc39dbca23e49043.jpeg"
-            ),
             MediaItem.Video(
                 id = "vid1",
-                videoUrl = "https://video.com/1",
-                thumbnailsUrl = "https://thumbnails.com/1"
+                videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                thumbnailsUrl = "https://images.openai.com/thumbnails/12a2b47b847ffbd5fc39dbca23e49043.jpeg"
             )
         ),
         profileUrl = "https://channel-thumbnail.com/1",
@@ -31,12 +27,6 @@ val testList = listOf(
                 id = "img2",
                 imageUrl = "https://www.news1.kr/_next/image?url=https%3A%2F%2Fi3n.news1.kr%2Fsystem%2Fphotos%2F2023%2F12%2F4%2F6361299%2Fhigh.jpg&w=1920&q=75"
             ),
-            MediaItem.Video(
-                id = "vid2",
-                videoUrl = "https://video.com/2",
-                thumbnailsUrl = "https://www.news1.kr/_next/image?url=https%3A%2F%2Fi3n.news1.kr%2Fsystem%2Fphotos%2F2023%2F12%2F4%2F6361299%2Fhigh.jpg&w=1920&q=75",
-                isMute = false
-            )
         ),
         profileUrl = "https://channel-thumbnail.com/2",
         title = "기안84",
@@ -48,13 +38,9 @@ val testList = listOf(
     ContentInfo(
         id = "3",
         thumbnails = listOf(
-            MediaItem.Image(
-                id = "img3",
-                imageUrl = "https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.webp"
-            ),
             MediaItem.Video(
                 id = "vid3",
-                videoUrl = "https://video.com/3",
+                videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
                 thumbnailsUrl = "https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.webp"
             )
         ),
