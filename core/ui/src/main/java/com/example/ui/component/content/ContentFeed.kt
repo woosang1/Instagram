@@ -124,7 +124,6 @@ fun ContentFeed(
             }
         }
 
-
         MediaHorizontalList(
             contentId = contentInfo.id,
             mediaItems = contentInfo.thumbnails,

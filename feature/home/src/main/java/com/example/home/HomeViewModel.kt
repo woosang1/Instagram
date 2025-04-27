@@ -11,6 +11,7 @@ import com.example.home.common.testStoryList
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.utils.FeatureErrorHandler
+import com.example.utils.log.DebugLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -40,24 +41,25 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.ClickMuteIcon -> {
                 val currentState = state.value.homeUiState
                 if (currentState is HomeUiState.Content) {
+                    DebugLog("currentState : ${currentState.toString()}")
                     val updatedSectionList = currentState.section.map { section ->
                         if (section is Section.Feed) {
                             val content = section.contentInfo
-                            if (content.id == event.contentId) {
+                            val updatedContent = if (content.id == event.contentId) {
                                 val updatedThumbnails = content.thumbnails.map { media ->
                                     if (media is MediaItem.Video && media.id == event.mediaId) {
                                         media.copy(isMute = !media.isMute)
                                     } else media
                                 }
                                 content.copy(thumbnails = updatedThumbnails)
+                            } else {
+                                content
                             }
-                            section.copy(contentInfo = content)
+                            section.copy(contentInfo = updatedContent)
                         } else {
                             section
                         }
                     }
-
-                    // 상태 업데이트
                     setState {
                         copy(
                             homeUiState = currentState.copy(
