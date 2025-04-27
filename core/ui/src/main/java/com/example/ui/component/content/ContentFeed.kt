@@ -16,9 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -29,14 +28,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -47,11 +41,11 @@ import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.ui.component.video.VideoPlayer
-import com.example.utils.log.DebugLog
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlin.math.abs
 import com.example.resource.R as ResourceR
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 
 @Composable
 fun ContentFeed(
@@ -117,7 +111,7 @@ fun ContentFeed(
             }
         }
 
-        MediaHorizontalList(
+        MediaHorizontalPager(
             contentId = contentInfo.id,
             mediaItems = contentInfo.thumbnails,
             isShowingItem = isShowingItem,
@@ -177,93 +171,64 @@ fun ContentFeed(
     }
 }
 
+
+
 @Composable
-internal fun MediaHorizontalList(
+internal fun MediaHorizontalPager(
     contentId: String,
     mediaItems: List<MediaItem>,
     isShowingItem: Boolean,
     onMuteClick: (contentId: String, mediaId: String) -> Unit
 ) {
-    val listState = rememberLazyListState()
-    val currentPage = remember { mutableIntStateOf(0) }
-
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.isScrollInProgress }
-            .distinctUntilChanged()
-            .collect { isScrolling ->
-                if (!isScrolling) {
-                    delay(80)
-                    val layoutInfo = listState.layoutInfo
-                    val visibleItems = layoutInfo.visibleItemsInfo
-                    val center = layoutInfo.viewportStartOffset + layoutInfo.viewportEndOffset / 2
-
-                    val closestItem = visibleItems.minByOrNull { item ->
-                        val itemCenter = item.offset + item.size / 2
-                        abs(itemCenter - center)
-                    }
-
-                    closestItem?.index?.let {
-                        currentPage.intValue = it
-                    }
-                }
-            }
-    }
+    val pagerState = rememberPagerState(pageCount = { mediaItems.size })
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1f)
+            .aspectRatio(1f) // 정사각형
     ) {
-        LazyRow(
-            state = listState,
-            modifier = Modifier
-                .fillMaxSize()
-                .clipToBounds(),
-            flingBehavior = rememberSnapFlingBehavior(listState)
-        ) {
-            itemsIndexed(mediaItems, key = { index, media -> media.id }) { index, media ->
-                val isSelected = (currentPage.intValue == index)
-                val isAutoPlay = (isSelected && isShowingItem)
-                DebugLog("index : ${index} / isSelected : ${isSelected} / currentPage : ${currentPage.intValue}")
-                DebugLog("isShowingItem : ${isShowingItem}")
-                DebugLog("isAutoPlay : ${isAutoPlay}")
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+            val media = mediaItems[page]
+            val isAutoPlay = (pagerState.currentPage == page) && isShowingItem
 
-                Box(
-                    modifier = Modifier
-                        .fillParentMaxHeight()
-                        .aspectRatio(1f)
-                ) {
-                    when (media) {
-                        is MediaItem.Image -> {
-                            AsyncImage(
-                                modifier = Modifier.fillMaxSize(),
-                                model = media.imageUrl,
-                                contentDescription = "Image",
-                                contentScale = ContentScale.Crop,
-                                placeholder = painterResource(ResourceR.drawable.placeholder)
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+            ) {
+                when (media) {
+                    is MediaItem.Image -> {
+                        AsyncImage(
+                            modifier = Modifier.fillMaxSize(),
+                            model = media.imageUrl,
+                            contentDescription = "Image",
+                            contentScale = ContentScale.Crop,
+                            placeholder = painterResource(ResourceR.drawable.placeholder)
+                        )
+                    }
+
+                    is MediaItem.Video -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            VideoPlayer(
+                                thumbnailsUrl = media.thumbnailsUrl,
+                                videoUrl = media.videoUrl,
+                                isAutoPlay = isAutoPlay,
+                                isMute = if (isAutoPlay) media.isMute else false
                             )
-                        }
-
-                        is MediaItem.Video -> {
-                            Box(
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                VideoPlayer(
-                                    thumbnailsUrl = media.thumbnailsUrl,
-                                    videoUrl = media.videoUrl,
-                                    isAutoPlay = isAutoPlay,
-                                    isMute = if (isAutoPlay) media.isMute else false
-                                )
-                                VolumeToggleButton(
-                                    modifier = Modifier
-                                        .align(Alignment.BottomEnd)
-                                        .padding(end = 8.dp, bottom = 8.dp),
-                                    isMuted = media.isMute,
-                                    onToggleVolume = {
-                                        onMuteClick(contentId, media.id)
-                                    }
-                                )
-                            }
+                            VolumeToggleButton(
+                                modifier = Modifier
+                                    .align(Alignment.BottomEnd)
+                                    .padding(end = 8.dp, bottom = 8.dp),
+                                isMuted = media.isMute,
+                                onToggleVolume = {
+                                    onMuteClick(contentId, media.id)
+                                }
+                            )
                         }
                     }
                 }
@@ -280,7 +245,7 @@ internal fun MediaHorizontalList(
                     shape = CircleShape
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp),
-            text = "${currentPage.intValue + 1} / ${mediaItems.size}",
+            text = "${pagerState.currentPage + 1} / ${mediaItems.size}",
             color = LocalColors.current.white,
             style = LocalTypography.current.body1
         )

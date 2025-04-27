@@ -75,7 +75,7 @@ fun ShortOverlayUI(
         Column(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(end = 72.dp) // 버튼 영역 피해서
+                .padding(end = 72.dp)
         ) {
             Text(
                 text = title,
