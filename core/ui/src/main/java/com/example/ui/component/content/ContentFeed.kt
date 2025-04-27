@@ -22,7 +22,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -33,7 +32,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clipToBounds
@@ -46,17 +44,12 @@ import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.ui.component.video.VideoPlayer
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.snapshotFlow
 import com.example.utils.log.DebugLog
-import kotlinx.coroutines.flow.filter
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
 import com.example.resource.R as ResourceR
 import kotlin.math.abs
 
@@ -247,7 +240,7 @@ fun MediaHorizontalList(
                         is MediaItem.Image -> {
                             AsyncImage(
                                 modifier = Modifier.fillMaxSize(),
-                                model = media.url,
+                                model = media.imageUrl,
                                 contentDescription = "Image",
                                 contentScale = ContentScale.Crop,
                                 placeholder = painterResource(ResourceR.drawable.placeholder)
@@ -258,21 +251,32 @@ fun MediaHorizontalList(
                             Box(
                                 modifier = Modifier.fillMaxSize()
                             ) {
-                                VideoPlayer(
-                                    videoUrl = media.url,
-                                    isAutoPlay = isAutoPlay,
-                                    isMute = if (isAutoPlay) media.isMute else false,
-                                    onReadyState = {}
-                                )
-                                VolumeToggleButton(
-                                    modifier = Modifier
-                                        .align(Alignment.BottomEnd)
-                                        .padding(end = 8.dp, bottom = 8.dp),
-                                    isMuted = media.isMute,
-                                    onToggleVolume = {
-                                        onMuteClick(contentId, media.id)
-                                    }
-                                )
+                                if(isSelected){
+                                    VideoPlayer(
+                                        videoUrl = media.videoUrl,
+                                        isAutoPlay = isAutoPlay,
+                                        isMute = if (isAutoPlay) media.isMute else false,
+                                        onReadyState = {}
+                                    )
+                                    VolumeToggleButton(
+                                        modifier = Modifier
+                                            .align(Alignment.BottomEnd)
+                                            .padding(end = 8.dp, bottom = 8.dp),
+                                        isMuted = media.isMute,
+                                        onToggleVolume = {
+                                            onMuteClick(contentId, media.id)
+                                        }
+                                    )
+                                }
+                                else{
+                                    AsyncImage(
+                                        modifier = Modifier.fillMaxSize(),
+                                        model = media.thumbnailsUrl,
+                                        contentDescription = "Image",
+                                        contentScale = ContentScale.Crop,
+                                        placeholder = painterResource(ResourceR.drawable.placeholder)
+                                    )
+                                }
                             }
                         }
                     }

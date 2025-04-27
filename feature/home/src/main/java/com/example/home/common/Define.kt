@@ -60,15 +60,16 @@ val testContentList = listOf(
         thumbnails = listOf(
             MediaItem.Image(
                 id = "0_0",
-                url = "https://cdn2.smentertainment.com/wp-content/uploads/2024/10/에스파-카리나-Up-무대-이미지.jpg"
+                imageUrl = "https://cdn2.smentertainment.com/wp-content/uploads/2024/10/에스파-카리나-Up-무대-이미지.jpg"
             ),
             MediaItem.Video(
                 id = "0_1",
-                url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                thumbnailsUrl = "https://www.news1.kr/_next/image?url=https%3A%2F%2Fi3n.news1.kr%2Fsystem%2Fphotos%2F2023%2F12%2F4%2F6361299%2Fhigh.jpg&w=1920&q=75"
             ),
             MediaItem.Image(
                 id = "0_2",
-                url = "https://images.openai.com/thumbnails/12a2b47b847ffbd5fc39dbca23e49043.jpeg"
+                imageUrl = "https://images.openai.com/thumbnails/12a2b47b847ffbd5fc39dbca23e49043.jpeg"
             )
         ),
         channelThumbnailUrl = "https://i.namu.wiki/i/2yoJvN6w-fUtbpz4fWqY_wn7B1tuLADIGM5YVTOJY5qaO0JwqlWzpuv-X3GRzUGcnzvnp9KOS6wn5x_4EJo0yQ.webp",
@@ -82,15 +83,16 @@ val testContentList = listOf(
         thumbnails = listOf(
             MediaItem.Video(
                 id = "1_0",
-                url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                thumbnailsUrl = "https://www.news1.kr/_next/image?url=https%3A%2F%2Fi3n.news1.kr%2Fsystem%2Fphotos%2F2023%2F12%2F4%2F6361299%2Fhigh.jpg&w=1920&q=75"
             ),
             MediaItem.Image(
                 id = "1_1",
-                url = "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2024/11/15/ef84b3b9-12a4-49af-9bbc-3ac064db216b.jpg"
+                imageUrl = "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2024/11/15/ef84b3b9-12a4-49af-9bbc-3ac064db216b.jpg"
             ),
             MediaItem.Image(
                 id = "1_2",
-                url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7N6uPq6jrh6AToZM-qN7oiEq2xGS4LZs3YHb3FJOjRlTbaLdGJoYFAhscrcUkFNObc8VzRY"
+                imageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7N6uPq6jrh6AToZM-qN7oiEq2xGS4LZs3YHb3FJOjRlTbaLdGJoYFAhscrcUkFNObc8VzRY"
             )
         ),
         channelThumbnailUrl = "https://iuedelweiss.tistory.com/258",
@@ -104,15 +106,15 @@ val testContentList = listOf(
         thumbnails = listOf(
             MediaItem.Image(
                 id = "2_0",
-                url = "https://cdn.seoulwire.com/news/photo/202407/615343_816176_94.jpg"
+                imageUrl = "https://cdn.seoulwire.com/news/photo/202407/615343_816176_94.jpg"
             ),
             MediaItem.Image(
                 id = "2_1",
-                url = "https://cdn.baccro.com/news/photo/201808/16499_40463_042.jpg"
+                imageUrl = "https://cdn.baccro.com/news/photo/201808/16499_40463_042.jpg"
             ),
             MediaItem.Image(
                 id = "2_2",
-                url = "https://dimg.donga.com/wps/NEWS/IMAGE/2024/11/27/130512780.1.jpg"
+                imageUrl = "https://dimg.donga.com/wps/NEWS/IMAGE/2024/11/27/130512780.1.jpg"
             )
         ),
         channelThumbnailUrl = "https://www.mk.co.kr/news/photos/11271822",
