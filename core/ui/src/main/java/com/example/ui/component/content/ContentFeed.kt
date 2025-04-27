@@ -251,32 +251,21 @@ fun MediaHorizontalList(
                             Box(
                                 modifier = Modifier.fillMaxSize()
                             ) {
-                                if(isSelected){
-                                    VideoPlayer(
-                                        videoUrl = media.videoUrl,
-                                        isAutoPlay = isAutoPlay,
-                                        isMute = if (isAutoPlay) media.isMute else false,
-                                        onReadyState = {}
-                                    )
-                                    VolumeToggleButton(
-                                        modifier = Modifier
-                                            .align(Alignment.BottomEnd)
-                                            .padding(end = 8.dp, bottom = 8.dp),
-                                        isMuted = media.isMute,
-                                        onToggleVolume = {
-                                            onMuteClick(contentId, media.id)
-                                        }
-                                    )
-                                }
-                                else{
-                                    AsyncImage(
-                                        modifier = Modifier.fillMaxSize(),
-                                        model = media.thumbnailsUrl,
-                                        contentDescription = "Image",
-                                        contentScale = ContentScale.Crop,
-                                        placeholder = painterResource(ResourceR.drawable.placeholder)
-                                    )
-                                }
+                                VideoPlayer(
+                                    thumbnailsUrl = media.thumbnailsUrl,
+                                    videoUrl = media.videoUrl,
+                                    isAutoPlay = isAutoPlay,
+                                    isMute = if (isAutoPlay) media.isMute else false
+                                )
+                                VolumeToggleButton(
+                                    modifier = Modifier
+                                        .align(Alignment.BottomEnd)
+                                        .padding(end = 8.dp, bottom = 8.dp),
+                                    isMuted = media.isMute,
+                                    onToggleVolume = {
+                                        onMuteClick(contentId, media.id)
+                                    }
+                                )
                             }
                         }
                     }

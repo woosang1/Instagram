@@ -11,6 +11,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.example.home.common.HomeEvent
 import com.example.home.common.HomeState
@@ -27,20 +28,18 @@ internal fun HomeContent(
 ) {
     val listState = rememberLazyListState()
 
-// 화면 크기와 중앙 위치 계산 (세로 높이 기준)
-    val screenHeightDp = LocalConfiguration.current.screenHeightDp
-    val screenCenter = (screenHeightDp / 2).toFloat()
+    val density = LocalDensity.current.density
+    val screenHeightPx = LocalConfiguration.current.screenHeightDp * density
+    val screenCenterPx = screenHeightPx / 2f
 
-    // LazyColumn에서 화면 중앙에 가까운 아이템을 찾는 함수
     val centerIndex = remember {
         derivedStateOf {
             val visibleItems = listState.layoutInfo.visibleItemsInfo
 
-            // 가장 중앙에 가까운 아이템의 인덱스를 찾기 (세로 위치 기준)
             visibleItems.minByOrNull {
                 val itemCenter = it.offset + (it.size / 2)
-                kotlin.math.abs(screenCenter - itemCenter)
-            }?.index ?: -1 // 해당 인덱스를 반환, 없으면 -1
+                kotlin.math.abs(screenCenterPx - itemCenter)
+            }?.index ?: -1
         }
     }
 
