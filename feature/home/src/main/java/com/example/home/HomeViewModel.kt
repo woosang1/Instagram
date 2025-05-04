@@ -73,6 +73,10 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+            is HomeEvent.Refresh -> {
+                setState { copy() }
+                setEffect(HomeSideEffect.ShowToast("새로고침 완료"))
+            }
         }
     }
 
