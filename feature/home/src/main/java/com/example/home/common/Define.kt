@@ -5,6 +5,7 @@ import com.example.model.ui.MediaItem
 import com.example.model.ui.StoryItem
 
 sealed class Section {
+    data object Header : Section()
     data class Story(
         val storyList: List<StoryItem>
     ) : Section()

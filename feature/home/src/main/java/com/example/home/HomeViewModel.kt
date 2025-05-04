@@ -27,6 +27,7 @@ class HomeViewModel @Inject constructor(
                     copy(
                         homeUiState = HomeUiState.Content(
                             section = ArrayList<Section>().apply {
+                                add(Section.Header)
                                 add(Section.Story(storyList = testStoryList))
                                 testContentList.forEachIndexed { index, contentInfo ->
                                     add(Section.Feed(contentInfo = contentInfo))

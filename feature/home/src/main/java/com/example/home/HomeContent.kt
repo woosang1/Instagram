@@ -16,6 +16,7 @@ import com.example.home.common.HomeEvent
 import com.example.home.common.HomeState
 import com.example.home.common.HomeUiState
 import com.example.home.common.Section
+import com.example.home.layout.HeaderLayout
 import com.example.home.layout.StoryList
 import com.example.ui.component.content.ContentFeed
 
@@ -49,6 +50,12 @@ internal fun HomeContent(
         ) {
             itemsIndexed(uiState.section) { index, section ->
                 when(section){
+                    is Section.Header -> {
+                        HeaderLayout(
+                            onClickLike = {},
+                            onClickShare = {}
+                        )
+                    }
                     is Section.Story -> {
                         StoryList(stories = section.storyList)
                     }

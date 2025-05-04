@@ -22,6 +22,7 @@ import com.example.shorts.common.ShortsEvent
 import com.example.shorts.common.ShortsState
 import com.example.shorts.common.ShortsUiState
 import com.example.ui.component.content.ContentVideo
+import com.example.ui.component.content.VideoTitle
 import com.example.utils.extension.getHeightDisplay
 import com.example.utils.extension.pxToDp
 import com.example.utils.log.DebugLog
@@ -60,8 +61,8 @@ internal fun ShortView(
     onEvent: (ShortsEvent) -> Unit
 ) {
     val context = LocalContext.current
-    // 상단탭 높이 48 / 바텀탭 높이 56
-    val shortsHeight = context.getHeightDisplay().pxToDp() - 48 - 56
+    // 바텀탭 높이 56
+    val shortsHeight = context.getHeightDisplay().pxToDp() - 56
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -89,6 +90,7 @@ internal fun ShortView(
                         videoUrl = thumbnails.videoUrl,
                         isAutoPlay = true,
                         isMute = thumbnails.isMute,
+                        videoTitle = VideoTitle.TITLE,
                         onClickEvent = {
                             onEvent.invoke(ShortsEvent.ClickVideo(id = thumbnails.id))
                         }
