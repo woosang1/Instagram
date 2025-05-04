@@ -6,12 +6,20 @@ import androidx.annotation.OptIn
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -28,6 +36,14 @@ import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
 import com.example.resource.R as ResourceR
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.dp
+import com.example.designsystem.theme.LocalColors
+import kotlinx.coroutines.delay
 
 
 @OptIn(UnstableApi::class)
@@ -37,12 +53,12 @@ fun VideoPlayer(
     videoUrl: String,
     isAutoPlay: Boolean = true,
     isMute: Boolean = true,
+    isShowProcessBar: Boolean = false
 ) {
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val isVideoReady = remember { mutableStateOf(false) }
-
     val exoPlayer = remember(videoUrl) {
         ExoPlayer.Builder(context).build().apply {
             repeatMode = Player.REPEAT_MODE_ONE
@@ -62,6 +78,7 @@ fun VideoPlayer(
             })
         }
     }
+    var currentPosition by remember { mutableLongStateOf(0L) }
 
     DisposableEffect(Unit) {
         onDispose {
@@ -107,27 +124,47 @@ fun VideoPlayer(
         }
     }
 
-    AndroidView(
-        factory = {
-            PlayerView(it).apply {
-                player = exoPlayer
-                useController = false
-                layoutParams = FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-                resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-            }
-        },
-        modifier = Modifier.fillMaxSize()
-    )
+    LaunchedEffect(exoPlayer) {
+        while (true) {
+            currentPosition = exoPlayer.currentPosition
+            delay(300L) // 0.3초 간격으로 업데이트
+        }
+    }
 
-    if (isAutoPlay) {
-        AnimatedVisibility(
-            visible = !isVideoReady.value,
-            enter = fadeIn(),
-            exit = fadeOut()
-        ) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        AndroidView(
+            factory = {
+                PlayerView(it).apply {
+                    player = exoPlayer
+                    useController = false
+                    layoutParams = FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    )
+                    resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                }
+            },
+            modifier = Modifier.fillMaxSize()
+        )
+
+        if (isAutoPlay) {
+            AnimatedVisibility(
+                visible = !isVideoReady.value,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                AsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = thumbnailsUrl,
+                    contentDescription = "Thumbnail",
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(ResourceR.drawable.placeholder)
+                )
+            }
+        }
+        else{
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = thumbnailsUrl,
@@ -136,15 +173,49 @@ fun VideoPlayer(
                 placeholder = painterResource(ResourceR.drawable.placeholder)
             )
         }
-    }
-    else{
-        AsyncImage(
-            modifier = Modifier.fillMaxSize(),
-            model = thumbnailsUrl,
-            contentDescription = "Thumbnail",
-            contentScale = ContentScale.Crop,
-            placeholder = painterResource(ResourceR.drawable.placeholder)
-        )
+
+        // 하단 프로그래스바
+        if (isShowProcessBar){
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(8.dp)
+                    .align(Alignment.BottomCenter)
+                    .pointerInput(Unit) {
+                        // 클릭 처리
+                        detectTapGestures { tapOffset ->
+                            val ratio = tapOffset.x / size.width.toFloat()
+                            val duration = exoPlayer.duration
+                            val position = (duration * ratio).toLong()
+                            exoPlayer.seekTo(position)
+                            // 클릭 시 재생/일시 정지 처리
+                            if (exoPlayer.isPlaying) {
+                                exoPlayer.pause()
+                            } else {
+                                if (exoPlayer.playbackState == Player.STATE_READY) {
+                                    exoPlayer.play()
+                                }
+                            }
+                        }
+                        // 드래그 처리
+                        detectDragGestures { _, dragAmount ->
+                            val ratio = (dragAmount.x / size.width.toFloat()).coerceIn(0f, 1f) // 드래그 비율 제한
+                            val duration = exoPlayer.duration
+                            val position = (duration * ratio).toLong()
+                            exoPlayer.seekTo(position)
+                        }
+                    }
+            ) {
+                LinearProgressIndicator(
+                    progress = { currentPosition / exoPlayer.duration.toFloat() },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(8.dp),
+                    color = LocalColors.current.red,
+                    trackColor = LocalColors.current.darkGray,
+                )
+            }
+        }
     }
 
 }
