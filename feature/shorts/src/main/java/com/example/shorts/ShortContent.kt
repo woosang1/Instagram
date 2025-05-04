@@ -19,6 +19,7 @@ import com.example.designsystem.theme.LocalColors
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.shorts.common.testList
+import com.example.ui.component.content.ContentVideo
 import com.example.ui.component.video.VideoPlayer
 import com.example.utils.extension.getHeightDisplay
 import com.example.utils.extension.pxToDp
@@ -68,11 +69,14 @@ internal fun ShortView(index: Int, isSelectPage: Boolean, model: ContentInfo) {
                 }
 
                 is MediaItem.Video -> {
-                    VideoPlayer(
+                    ContentVideo(
                         thumbnailsUrl = thumbnails.thumbnailsUrl,
                         videoUrl = thumbnails.videoUrl,
                         isAutoPlay = true,
-                        isMute = false
+                        isMute = false,
+                        onClickEvent = {
+                            dsfsdfsd
+                        }
                     )
                 }
             }
