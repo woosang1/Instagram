@@ -15,6 +15,7 @@ import com.example.search.layout.ShortsGridLayout
 
 @Composable
 fun SearchScreen(
+    onStartVideoDetail: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -27,7 +28,7 @@ fun SearchScreen(
                 .fillMaxSize()
                 .padding(top = 8.dp),
             items = testContentList,
-            onItemClick = {}
+            onItemClick = { onStartVideoDetail() }
         )
     }
 }

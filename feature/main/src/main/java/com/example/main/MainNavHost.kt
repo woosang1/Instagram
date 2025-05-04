@@ -4,11 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.example.home.navigation.homeNavGraph
-import com.example.mypage.navigation.MypageNavGraph
+import com.example.mypage.navigation.mypageNavGraph
 import com.example.navigation.MainRoute
-import com.example.search.navigation.SearchNavGraph
-import com.example.shorts.navigation.ShortsNavGraph
-import com.example.upload.navigation.UploadNavGraph
+import com.example.search.navigation.searchNavGraph
+import com.example.shorts.navigation.shortsNavGraph
+import com.example.upload.navigation.uploadNavGraph
 import com.example.videodetail.navigation.videoDetailNavGraph
 
 
@@ -25,10 +25,12 @@ internal fun MainNavHost(
         homeNavGraph(
             onStartVideoDetail = { navigator.navigationVideoDetail() }
         )
-        SearchNavGraph()
-        UploadNavGraph()
-        ShortsNavGraph()
-        MypageNavGraph()
+        searchNavGraph(
+            onStartVideoDetail = { navigator.navigationVideoDetail() }
+        )
+        uploadNavGraph()
+        shortsNavGraph()
+        mypageNavGraph()
         videoDetailNavGraph(
             onBackEvent = { navigator.popBackStackIfNotHome() }
         )

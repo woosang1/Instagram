@@ -10,8 +10,10 @@ fun NavController.navigationSearch(){
     navigate(MainRoute.Search)
 }
 
-fun NavGraphBuilder.SearchNavGraph() {
+fun NavGraphBuilder.searchNavGraph(
+    onStartVideoDetail: () -> Unit
+) {
     composable<MainRoute.Search>{
-        SearchRoute()
+        SearchRoute(onStartVideoDetail = onStartVideoDetail)
     }
 }

@@ -3,6 +3,8 @@ package com.example.search
 import androidx.compose.runtime.Composable
 
 @Composable
-fun SearchRoute() {
-    SearchScreen()
+fun SearchRoute(
+    onStartVideoDetail: () -> Unit
+) {
+    SearchScreen(onStartVideoDetail = onStartVideoDetail)
 }

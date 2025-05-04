@@ -9,8 +9,8 @@ fun NavController.navigationUpload(){
     navigate(MainRoute.Upload)
 }
 
-fun NavGraphBuilder.UploadNavGraph() {
+fun NavGraphBuilder.uploadNavGraph() {
     composable<MainRoute.Upload>{
-        UploadNavGraph()
+        uploadNavGraph()
     }
 }

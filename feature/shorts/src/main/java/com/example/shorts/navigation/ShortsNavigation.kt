@@ -10,7 +10,7 @@ fun NavController.navigationShorts(){
     navigate(MainRoute.Shorts)
 }
 
-fun NavGraphBuilder.ShortsNavGraph() {
+fun NavGraphBuilder.shortsNavGraph() {
     composable<MainRoute.Shorts>{
         ShortsRoute()
     }

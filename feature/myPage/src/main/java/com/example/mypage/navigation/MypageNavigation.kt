@@ -10,7 +10,7 @@ fun NavController.navigationMypage(){
     navigate(MainRoute.MyPage)
 }
 
-fun NavGraphBuilder.MypageNavGraph() {
+fun NavGraphBuilder.mypageNavGraph() {
     composable<MainRoute.MyPage>{
         MypageRoute()
     }
