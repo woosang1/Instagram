@@ -7,16 +7,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.ui.component.video.VideoPlayer
-import com.example.resource.R as ResourceR
-import androidx.compose.runtime.*
-import androidx.compose.ui.draw.alpha
 import com.example.utils.extension.noRippleClickable
 import kotlinx.coroutines.delay
+import com.example.resource.R as ResourceR
 
 @Composable
 fun ContentVideo(

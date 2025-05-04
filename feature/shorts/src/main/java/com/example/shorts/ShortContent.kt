@@ -21,9 +21,7 @@ import com.example.model.ui.MediaItem
 import com.example.shorts.common.ShortsEvent
 import com.example.shorts.common.ShortsState
 import com.example.shorts.common.ShortsUiState
-import com.example.shorts.common.testList
 import com.example.ui.component.content.ContentVideo
-import com.example.ui.component.video.VideoPlayer
 import com.example.utils.extension.getHeightDisplay
 import com.example.utils.extension.pxToDp
 import com.example.utils.log.DebugLog

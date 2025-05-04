@@ -1,6 +1,5 @@
 package com.example.main
 
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavDestination.Companion.hasRoute
