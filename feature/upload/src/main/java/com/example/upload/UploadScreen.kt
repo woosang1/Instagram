@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.designsystem.theme.LocalColors
+import com.example.upload.layout.GalleryPickerWithIntentAutoLaunch
 
 @Composable
 fun UploadScreen(
@@ -13,6 +14,8 @@ fun UploadScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(LocalColors.current.gray)
-    )
+            .background(LocalColors.current.black)
+    ) {
+        GalleryPickerWithIntentAutoLaunch()
+    }
 }
