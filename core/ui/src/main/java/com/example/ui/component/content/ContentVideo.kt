@@ -1,5 +1,9 @@
 package com.example.ui.component.content
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -45,17 +49,31 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
+import androidx.compose.ui.draw.alpha
 import com.example.utils.extension.noRippleClickable
+import kotlinx.coroutines.delay
 
 @Composable
 fun ContentVideo(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     thumbnailsUrl: String,
     videoUrl: String,
     isAutoPlay: Boolean = true,
     isMute: Boolean = false,
     onClickEvent: () -> Unit,
 ) {
+    var previousIsMute by remember { mutableStateOf(isMute) }
+    var showIcon by remember { mutableStateOf(false) }
+
+    LaunchedEffect(isMute) {
+        if (previousIsMute != isMute) {
+            previousIsMute = isMute
+            showIcon = true
+            delay(800)
+            showIcon = false
+        }
+    }
+
     Box(
         modifier = modifier
             .noRippleClickable { onClickEvent() }
@@ -66,5 +84,22 @@ fun ContentVideo(
             isAutoPlay = isAutoPlay,
             isMute = isMute
         )
+
+        AnimatedVisibility(
+            visible = showIcon,
+            enter = fadeIn(),
+            exit = fadeOut(),
+            modifier = Modifier.align(Alignment.Center)
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(64.dp)
+                    .alpha(0.75f),
+                painter = painterResource(
+                    id = if (isMute) ResourceR.drawable.mute_on else ResourceR.drawable.mute_off
+                ),
+                contentDescription = if (isMute) "Muted" else "Unmuted",
+            )
+        }
     }
 }

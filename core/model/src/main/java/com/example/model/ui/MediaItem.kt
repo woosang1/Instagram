@@ -6,7 +6,7 @@ sealed class MediaItem(
     data class Image(
         override val id: String,
         val imageUrl: String
-    ) : MediaItem(id = id,)
+    ) : MediaItem(id = id)
 
     data class Video(
         override val id: String,
