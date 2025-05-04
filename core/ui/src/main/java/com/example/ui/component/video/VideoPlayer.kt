@@ -32,6 +32,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -40,6 +41,7 @@ import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
+import com.example.ui.component.licenseUrl
 import kotlinx.coroutines.delay
 import com.example.resource.R as ResourceR
 
@@ -58,8 +60,20 @@ fun VideoPlayer(
     val lifecycleOwner = LocalLifecycleOwner.current
     val isVideoReady = remember { mutableStateOf(false) }
     val exoPlayer = remember(videoUrl) {
+
+        // DRM 설정: Widevine 사용 및 라이선스 서버 URI 지정
+        val drmConfig = MediaItem.DrmConfiguration.Builder(C.WIDEVINE_UUID)
+            .setLicenseUri(licenseUrl)
+            .build()
+
+        val mediaItem = MediaItem.Builder()
+            .setUri(videoUrl)
+            .setDrmConfiguration(drmConfig)
+            .build()
+
         ExoPlayer.Builder(context).build().apply {
             repeatMode = Player.REPEAT_MODE_ONE
+            setMediaItem(mediaItem)
             addListener(object : Player.Listener {
                 override fun onPlaybackStateChanged(state: Int) {
                     when (state) {
