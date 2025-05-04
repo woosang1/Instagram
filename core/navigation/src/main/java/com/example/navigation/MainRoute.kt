@@ -18,4 +18,7 @@ sealed interface MainRoute {
 
     @Serializable
     data object MyPage : MainRoute
+
+    @Serializable
+    data object VideoDetail: MainRoute
 }

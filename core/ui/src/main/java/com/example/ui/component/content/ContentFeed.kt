@@ -41,11 +41,8 @@ import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.ui.component.video.VideoPlayer
+import com.example.utils.extension.noRippleClickable
 import com.example.resource.R as ResourceR
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
 
 @Composable
 fun ContentFeed(
@@ -56,6 +53,7 @@ fun ContentFeed(
     onLikeClick: () -> Unit,
     onCommentClick: () -> Unit,
     onShareClick: () -> Unit,
+    onClickVideo: (videoId: String) -> Unit,
     onMuteClick: (contentId: String, mediaId: String) -> Unit,
 ) {
     Column(
@@ -115,7 +113,8 @@ fun ContentFeed(
             contentId = contentInfo.id,
             mediaItems = contentInfo.thumbnails,
             isShowingItem = isShowingItem,
-            onMuteClick = onMuteClick
+            onMuteClick = onMuteClick,
+            onClickVideo = onClickVideo
         )
 
         // 아이콘 바 (좋아요, 댓글, 공유)
@@ -178,6 +177,7 @@ internal fun MediaHorizontalPager(
     contentId: String,
     mediaItems: List<MediaItem>,
     isShowingItem: Boolean,
+    onClickVideo: (videoId: String) -> Unit,
     onMuteClick: (contentId: String, mediaId: String) -> Unit
 ) {
     val pagerState = rememberPagerState(pageCount = { mediaItems.size })
@@ -213,6 +213,7 @@ internal fun MediaHorizontalPager(
                     is MediaItem.Video -> {
                         Box(
                             modifier = Modifier.fillMaxSize()
+                                .noRippleClickable { onClickVideo(media.id) }
                         ) {
                             VideoPlayer(
                                 thumbnailsUrl = media.thumbnailsUrl,

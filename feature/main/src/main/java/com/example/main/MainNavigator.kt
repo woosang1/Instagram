@@ -1,5 +1,6 @@
 package com.example.main
 
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavDestination.Companion.hasRoute
@@ -11,6 +12,7 @@ import com.example.navigation.MainRoute
 import com.example.search.navigation.navigationSearch
 import com.example.shorts.navigation.navigationShorts
 import com.example.upload.navigation.navigationUpload
+import com.example.videodetail.navigation.navigationVideoDetail
 
 internal class MainNavigator(
     val navController: NavHostController,
@@ -44,6 +46,10 @@ internal class MainNavigator(
         if (navController.currentDestination?.route.toString().contains(MainRoute.MyPage::class.simpleName.toString()).not()) {
             navController.navigationMypage()
         }
+    }
+
+    fun navigationVideoDetail() {
+        navController.navigationVideoDetail()
     }
 
     fun popBackStackIfNotHome() {

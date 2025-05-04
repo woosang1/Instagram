@@ -64,6 +64,9 @@ internal fun HomeContent(
                             onShareClick = {},
                             onMuteClick = { contentId, mediaId ->
                                 onEvent(HomeEvent.ClickMuteIcon(contentId = contentId, mediaId = mediaId))
+                            },
+                            onClickVideo = { id ->
+                                onEvent(HomeEvent.ClickVideo(videoId = id))
                             }
                         )
                     }

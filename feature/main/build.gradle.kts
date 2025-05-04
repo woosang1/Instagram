@@ -39,12 +39,12 @@ android {
 }
 
 dependencies {
-
     implementation(project(":feature:home"))
     implementation(project(":feature:shorts"))
     implementation(project(":feature:upload"))
     implementation(project(":feature:search"))
     implementation(project(":feature:myPage"))
+    implementation(project(":feature:videoDetail"))
 
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))

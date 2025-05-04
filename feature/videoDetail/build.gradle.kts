@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.home"
+    namespace = "com.example.videodetail"
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 26
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:videoDetail"))
+
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:utils"))
@@ -79,9 +79,4 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.kotlinx.collections.immutable)
-    
-    // ExoPlayer core
-    implementation(libs.androidx.media3.exoplayer)
-    implementation(libs.androidx.media3.ui)
-
 }

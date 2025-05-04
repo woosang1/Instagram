@@ -36,6 +36,10 @@ class HomeViewModel @Inject constructor(
                     )
                 }
             }
+            is HomeEvent.ClickVideo -> {
+                DebugLog("is HomeEvent.ClickVideo -> {")
+                setEffect(HomeSideEffect.StartVideoDetail(videoId = event.videoId))
+            }
 
             is HomeEvent.ClickMuteIcon -> {
                 val currentState = state.value.homeUiState

@@ -10,8 +10,12 @@ fun NavController.navigationHome(){
     navigate(MainRoute.Home)
 }
 
-fun NavGraphBuilder.homeNavGraph() {
+fun NavGraphBuilder.homeNavGraph(
+    onStartVideoDetail: () -> Unit
+) {
     composable<MainRoute.Home>{
-        HomeRoute()
+        HomeRoute(
+            onStartVideoDetail = onStartVideoDetail
+        )
     }
 }
