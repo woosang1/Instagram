@@ -58,7 +58,7 @@ val testStoryList = listOf(
 val testContentList = listOf(
     ContentInfo(
         id = "0",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Image(
                 id = "0_0",
                 imageUrl = "https://cdn2.smentertainment.com/wp-content/uploads/2024/10/에스파-카리나-Up-무대-이미지.jpg"
@@ -81,7 +81,7 @@ val testContentList = listOf(
     ),
     ContentInfo(
         id = "1",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Video(
                 id = "1_0",
                 videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -104,7 +104,7 @@ val testContentList = listOf(
     ),
     ContentInfo(
         id = "2",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Image(
                 id = "2_0",
                 imageUrl = "https://cdn.seoulwire.com/news/photo/202407/615343_816176_94.jpg"
@@ -126,7 +126,7 @@ val testContentList = listOf(
     ),
     ContentInfo(
         id = "3",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Image(
                 id = "3_0",
                 "https://flexible.img.hani.co.kr/flexible/normal/960/960/imgdb/resize/2019/0121/00501111_20190121.webp"

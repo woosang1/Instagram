@@ -110,7 +110,7 @@ fun ContentFeed(
 
         MediaHorizontalPager(
             contentId = contentInfo.id,
-            mediaItems = contentInfo.thumbnails,
+            mediaItems = contentInfo.mediaItemList,
             isShowingItem = isShowingItem,
             onMuteClick = onMuteClick,
             onClickVideo = onClickVideo

@@ -29,7 +29,7 @@ class ShortsViewModel @Inject constructor(
                 val currentState = state.value.shortsUiState
                 if (currentState is ShortsUiState.Content) {
                     val newList = currentState.contentInfoList.map { contentInfo ->
-                        val updatedThumbnails = contentInfo.thumbnails.map { mediaItem ->
+                        val updatedThumbnails = contentInfo.mediaItemList.map { mediaItem ->
                             DebugLog("mediaItem.id : ${mediaItem.id}")
                             if (mediaItem is MediaItem.Video && mediaItem.id == event.id) {
                                 DebugLog("mediaItem is MediaItem.Video && mediaItem.id == event.id")
@@ -38,7 +38,7 @@ class ShortsViewModel @Inject constructor(
                                 mediaItem
                             }
                         }
-                        contentInfo.copy(thumbnails = updatedThumbnails)
+                        contentInfo.copy(mediaItemList = updatedThumbnails)
                     }
                     DebugLog("newList : ${newList.toString()}")
 

@@ -6,7 +6,7 @@ import com.example.model.ui.MediaItem
 val testList = listOf(
     ContentInfo(
         id = "1",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Video(
                 id = "vid1",
                 videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
@@ -22,7 +22,7 @@ val testList = listOf(
     ),
     ContentInfo(
         id = "2",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Image(
                 id = "img2",
                 imageUrl = "https://www.news1.kr/_next/image?url=https%3A%2F%2Fi3n.news1.kr%2Fsystem%2Fphotos%2F2023%2F12%2F4%2F6361299%2Fhigh.jpg&w=1920&q=75"
@@ -37,7 +37,7 @@ val testList = listOf(
     ),
     ContentInfo(
         id = "3",
-        thumbnails = listOf(
+        mediaItemList = listOf(
             MediaItem.Video(
                 id = "vid3",
                 videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",

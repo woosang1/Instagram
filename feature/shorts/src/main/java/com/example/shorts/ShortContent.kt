@@ -70,7 +70,7 @@ internal fun ShortView(
             .background(LocalColors.current.blue),
         contentAlignment = Alignment.Center
     ) {
-        val thumbnails = model.thumbnails.first()
+        val thumbnails = model.mediaItemList.first()
         if (isSelectPage) {
             when (thumbnails) {
                 is MediaItem.Image -> {

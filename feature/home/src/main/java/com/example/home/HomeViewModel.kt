@@ -50,12 +50,12 @@ class HomeViewModel @Inject constructor(
                         if (section is Section.Feed) {
                             val content = section.contentInfo
                             val updatedContent = if (content.id == event.contentId) {
-                                val updatedThumbnails = content.thumbnails.map { media ->
+                                val updatedThumbnails = content.mediaItemList.map { media ->
                                     if (media is MediaItem.Video && media.id == event.mediaId) {
                                         media.copy(isMute = !media.isMute)
                                     } else media
                                 }
-                                content.copy(thumbnails = updatedThumbnails)
+                                content.copy(mediaItemList = updatedThumbnails)
                             } else {
                                 content
                             }
