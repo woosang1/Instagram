@@ -4,8 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,7 +41,8 @@ fun ContentVideo(
     isAutoPlay: Boolean = true,
     isMute: Boolean = false,
     videoTitle: VideoTitle = VideoTitle.NONE,
-    onClickEvent: () -> Unit,
+    onClickVideoEvent: () -> Unit,
+    onClickBackIcon: () -> Unit = {},
 ) {
     var previousIsMute by remember { mutableStateOf(isMute) }
     var showIcon by remember { mutableStateOf(false) }
@@ -59,7 +58,7 @@ fun ContentVideo(
 
     Box(
         modifier = modifier
-            .noRippleClickable { onClickEvent() }
+            .noRippleClickable { onClickVideoEvent() }
     ){
 
         VideoPlayer(
@@ -74,7 +73,7 @@ fun ContentVideo(
             VideoTitle.BACK_ICON -> {
                 HeaderLayoutWithBackIcon(
                     modifier = Modifier.align(Alignment.TopCenter),
-                    onClickBackIcon = {}
+                    onClickBackIcon = onClickBackIcon
                 )
             }
             VideoTitle.TITLE -> {

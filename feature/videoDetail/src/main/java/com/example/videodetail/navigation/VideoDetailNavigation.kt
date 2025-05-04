@@ -16,7 +16,9 @@ fun NavController.navigationVideoDetail(){
 
 }
 
-fun NavGraphBuilder.videoDetailNavGraph() {
+fun NavGraphBuilder.videoDetailNavGraph(
+    onBackEvent: () -> Unit
+) {
     DebugLog(" videoDetailNavGraph !!! ")
     composable<MainRoute.VideoDetail>(
         enterTransition = {
@@ -44,6 +46,8 @@ fun NavGraphBuilder.videoDetailNavGraph() {
             )
         }
     ) {
-        VideoDetailRoute()
+        VideoDetailRoute(
+            onBackEvent = onBackEvent
+        )
     }
 }

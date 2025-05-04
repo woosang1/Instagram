@@ -91,7 +91,7 @@ internal fun ShortView(
                         isAutoPlay = true,
                         isMute = thumbnails.isMute,
                         videoTitle = VideoTitle.TITLE,
-                        onClickEvent = {
+                        onClickVideoEvent = {
                             onEvent.invoke(ShortsEvent.ClickVideo(id = thumbnails.id))
                         }
                     )

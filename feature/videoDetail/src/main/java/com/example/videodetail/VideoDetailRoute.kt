@@ -5,7 +5,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun VideoDetailRoute(
-    videoDetailViewModel: VideoDetailViewModel = hiltViewModel()
+    videoDetailViewModel: VideoDetailViewModel = hiltViewModel(),
+    onBackEvent: () -> Unit
 ) {
-    VideoDetailScreen()
+    VideoDetailScreen(
+        onBackEvent = onBackEvent
+    )
 }

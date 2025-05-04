@@ -9,13 +9,13 @@ import com.example.designsystem.theme.LocalColors
 
 @Composable
 fun VideoDetailScreen(
-
+    onBackEvent: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(LocalColors.current.black)
     ) {
-        VideoDetailContent()
+        VideoDetailContent(onBackEvent = onBackEvent)
     }
 }

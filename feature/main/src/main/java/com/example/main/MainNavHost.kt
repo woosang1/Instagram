@@ -29,6 +29,8 @@ internal fun MainNavHost(
         UploadNavGraph()
         ShortsNavGraph()
         MypageNavGraph()
-        videoDetailNavGraph()
+        videoDetailNavGraph(
+            onBackEvent = { navigator.popBackStackIfNotHome() }
+        )
     }
 }
