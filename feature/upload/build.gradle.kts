@@ -75,4 +75,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.kotlinx.collections.immutable)
+
+    implementation(libs.accompanist.permissions)
+
 }

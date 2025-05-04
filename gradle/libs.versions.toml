@@ -1,5 +1,6 @@
 [versions]
 ## Android gradle plugin
+accompanistPermissions = "0.25.1"
 androidGradlePlugin = "8.3.2"
 
 # https://github.com/google/desugar_jdk_libs/blob/master/CHANGELOG.md
@@ -46,6 +47,7 @@ mockk = "1.13.16"
 kotest = "5.9.0"
 
 [libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "android-hilt" }
 androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3Exoplayer" }
