@@ -34,4 +34,8 @@ Jetpack Compose 기반의 **인스타그램 클론 앱**입니다. 최신 안드
   <img src="screenshots/2.jpg" width="500" alt="2">
 </p>
 
+프레임별 동영상 스크린샷 생성  
+fps=1/5 (초당 프레임 수 / 5초의 1프레임)  
+ffmpeg -i https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4 -vf "fps=1/1" thumbnail%03d.jpg
+
 
