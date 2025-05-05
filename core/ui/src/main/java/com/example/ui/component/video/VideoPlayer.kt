@@ -7,6 +7,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,6 +19,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -60,7 +62,6 @@ fun VideoPlayer(
     val lifecycleOwner = LocalLifecycleOwner.current
     val isVideoReady = remember { mutableStateOf(false) }
     val exoPlayer = remember(videoUrl) {
-
         // DRM 설정: Widevine 사용 및 라이선스 서버 URI 지정
         val drmConfig = MediaItem.DrmConfiguration.Builder(C.WIDEVINE_UUID)
             .setLicenseUri(licenseUrl)
@@ -85,12 +86,12 @@ fun VideoPlayer(
                         Player.STATE_IDLE -> Unit
                     }
                 }
-
                 override fun onIsPlayingChanged(isPlaying: Boolean) { }
             })
         }
     }
     var currentPosition by remember { mutableLongStateOf(0L) }
+    var dragProgress by remember { mutableFloatStateOf(-1f) }
 
     DisposableEffect(Unit) {
         onDispose {
@@ -194,32 +195,30 @@ fun VideoPlayer(
                     .height(8.dp)
                     .align(Alignment.BottomCenter)
                     .pointerInput(Unit) {
-                        // 클릭 처리
-                        detectTapGestures { tapOffset ->
-                            val ratio = tapOffset.x / size.width.toFloat()
-                            val duration = exoPlayer.duration
-                            val position = (duration * ratio).toLong()
-                            exoPlayer.seekTo(position)
-                            // 클릭 시 재생/일시 정지 처리
-                            if (exoPlayer.isPlaying) {
-                                exoPlayer.pause()
-                            } else {
-                                if (exoPlayer.playbackState == Player.STATE_READY) {
-                                    exoPlayer.play()
-                                }
+                        detectHorizontalDragGestures(
+                            onDragStart = { offset ->
+                                val ratio = (offset.x / size.width).coerceIn(0f, 1f)
+                                dragProgress = ratio
+                            },
+                            onHorizontalDrag = { change, dragAmount ->
+                                change.consume()
+                                dragProgress = (dragProgress + dragAmount / size.width).coerceIn(0f, 1f)
+                            },
+                            onDragEnd = {
+                                val seekPosition = (exoPlayer.duration * dragProgress).toLong()
+                                exoPlayer.seekTo(seekPosition)
+                                dragProgress = -1f 
+                            },
+                            onDragCancel = {
+                                dragProgress = -1f
                             }
-                        }
-                        // 드래그 처리
-                        detectDragGestures { _, dragAmount ->
-                            val ratio = (dragAmount.x / size.width.toFloat()).coerceIn(0f, 1f) // 드래그 비율 제한
-                            val duration = exoPlayer.duration
-                            val position = (duration * ratio).toLong()
-                            exoPlayer.seekTo(position)
-                        }
+                        )
                     }
             ) {
+                val progress = if (dragProgress >= 0f) dragProgress else currentPosition / exoPlayer.duration.toFloat()
+
                 LinearProgressIndicator(
-                    progress = { currentPosition / exoPlayer.duration.toFloat() },
+                    progress = { progress },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(8.dp),
