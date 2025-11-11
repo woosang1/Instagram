@@ -1,37 +1,15 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("instagram.android.library")
+    id("instagram.android.compose")
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android.ksp)
 }
 
 android {
     namespace = "com.example.mypage"
-    compileSdk = 35
 
     defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
     }
 }
 
@@ -54,7 +32,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.espresso.core)
-    implementation(libs.kotlinx.collections.immutable)
     implementation(libs.coil.compose)
     implementation(libs.androidx.compose.navigation)
 
@@ -73,6 +50,4 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     ksp(libs.androidx.hilt.compier)
     implementation(libs.androidx.hilt.navigation.compose)
-
-    implementation(libs.kotlinx.collections.immutable)
 }

@@ -1,19 +1,15 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("instagram.android.library")
+    id("instagram.android.compose")
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android.ksp)
 }
 
 android {
     namespace = "com.example.videodetail"
-    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -25,16 +21,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
     }
 }
 
@@ -48,7 +34,7 @@ dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:resource"))
 
-    // compopse
+    // compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -77,6 +63,4 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     ksp(libs.androidx.hilt.compier)
     implementation(libs.androidx.hilt.navigation.compose)
-
-    implementation(libs.kotlinx.collections.immutable)
 }

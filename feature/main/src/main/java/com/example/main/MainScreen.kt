@@ -1,5 +1,6 @@
 package com.example.main
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -106,6 +107,7 @@ private fun BottomNavigationIcon(
 ) {
     val colors = LocalColors.current
     val interactionSource = remember { MutableInteractionSource() }
+    val indication = LocalIndication.current
 
     Box(
         modifier = Modifier
@@ -116,7 +118,7 @@ private fun BottomNavigationIcon(
             .padding(horizontal = 16.dp, vertical = 10.dp)
             .clickable(
                 interactionSource = interactionSource,
-                indication = null,
+                indication = indication,
                 onClick = onClick
             ),
         contentAlignment = Alignment.Center
