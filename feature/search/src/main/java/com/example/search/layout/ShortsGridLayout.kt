@@ -1,6 +1,5 @@
 package com.example.search.layout
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,10 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.resource.R
+import com.example.ui.component.IGImage
 import com.example.utils.extension.noRippleClickable
 
 @Composable
@@ -48,7 +47,7 @@ fun ShortsGridLayout(
                     .noRippleClickable { onItemClick(item) }
             ) {
                 Box {
-                    AsyncImage(
+                    IGImage(
                         modifier = Modifier
                             .fillMaxSize()
                             .aspectRatio(1f),
@@ -60,7 +59,7 @@ fun ShortsGridLayout(
                         contentScale = ContentScale.Crop,
                         placeholder = painterResource(R.drawable.placeholder)
                     )
-                    Image(
+                    IGImage(
                         modifier = Modifier
                             .size(28.dp)
                             .align(Alignment.TopEnd)

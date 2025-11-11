@@ -1,6 +1,5 @@
 package com.example.ui.component.content
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -15,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
+import com.example.ui.component.IGImage
 import com.example.resource.R
 
 @Composable
@@ -30,7 +30,7 @@ fun VolumeToggleButton(
             .clickable { onToggleVolume() },
         contentAlignment = Alignment.Center
     ) {
-        Image(
+        IGImage(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(CircleShape),

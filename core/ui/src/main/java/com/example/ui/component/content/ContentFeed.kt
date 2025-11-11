@@ -25,7 +25,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,11 +33,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
+import com.example.ui.component.IGImage
+import com.example.ui.component.IGText
 import com.example.ui.component.video.VideoPlayer
 import com.example.utils.extension.noRippleClickable
 import com.example.resource.R as ResourceR
@@ -79,7 +79,7 @@ fun ContentFeed(
                     .padding(2.dp)
                     .clickable { onProfileClick() }
             ) {
-                AsyncImage(
+                IGImage(
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(CircleShape),
@@ -92,7 +92,7 @@ fun ContentFeed(
             Spacer(modifier = Modifier.width(8.dp))
 
             //  채널 이름
-            Text(
+            IGText(
                 text = contentInfo.profileName,
                 color = LocalColors.current.white,
                 style = LocalTypography.current.body1,
@@ -147,7 +147,7 @@ fun ContentFeed(
         }
 
         // 좋아요 수
-        Text(
+        IGText(
             text = "${contentInfo.viewCount} likes",
             color = LocalColors.current.white,
             style = LocalTypography.current.body1,
@@ -157,7 +157,7 @@ fun ContentFeed(
         Spacer(modifier = Modifier.height(4.dp))
 
         // 타이틀 + 설명
-        Text(
+        IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
             text = contentInfo.title,
             color = LocalColors.current.white,
@@ -200,7 +200,7 @@ internal fun MediaHorizontalPager(
             ) {
                 when (media) {
                     is MediaItem.Image -> {
-                        AsyncImage(
+                        IGImage(
                             modifier = Modifier.fillMaxSize(),
                             model = media.imageUrl,
                             contentDescription = "Image",
@@ -236,7 +236,7 @@ internal fun MediaHorizontalPager(
         }
 
         // 페이지 인디케이터
-        Text(
+        IGText(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(8.dp)

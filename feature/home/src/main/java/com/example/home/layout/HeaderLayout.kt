@@ -10,7 +10,6 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +17,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
+import com.example.ui.component.IGText
 
 @Composable
 fun HeaderLayout(
@@ -33,7 +33,7 @@ fun HeaderLayout(
         verticalAlignment = Alignment.CenterVertically
     )
     {
-        Text(
+        IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
             text = "Instagram",
             color = LocalColors.current.white,

@@ -3,7 +3,6 @@ package com.example.ui.component.content
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,6 +26,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
+import com.example.ui.component.IGImage
+import com.example.ui.component.IGText
 import com.example.ui.component.video.VideoPlayer
 import com.example.utils.extension.noRippleClickable
 import kotlinx.coroutines.delay
@@ -90,7 +90,7 @@ fun ContentVideo(
             exit = fadeOut(),
             modifier = Modifier.align(Alignment.Center)
         ) {
-            Image(
+            IGImage(
                 modifier = Modifier
                     .size(64.dp)
                     .alpha(0.75f),
@@ -123,7 +123,7 @@ fun HeaderLayoutWithBackIcon(
             )
         }
 
-        Text(
+        IGText(
             modifier = Modifier.padding(start = 12.dp),
             text = "릴스",
             color = LocalColors.current.white,
@@ -145,7 +145,7 @@ fun HeaderLayoutWithTitle(
         verticalAlignment = Alignment.CenterVertically
     )
     {
-        Text(
+        IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
             text = "릴스",
             color = LocalColors.current.white,

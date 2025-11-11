@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.example.designsystem.theme.LocalColors
 import com.example.upload.layout.InstagramGalleryPicker
@@ -23,7 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import com.example.ui.component.IGImage
 import com.example.utils.extension.showToast
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -52,7 +51,7 @@ fun UploadScreen(
         else {
             Spacer(modifier = Modifier.height(16.dp))
             selectedImageUri?.let { uri ->
-                AsyncImage(
+                IGImage(
                     model = uri,
                     contentDescription = null,
                     modifier = Modifier

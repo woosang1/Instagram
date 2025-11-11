@@ -14,13 +14,13 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
+import com.example.ui.component.IGText
 
 @Composable
 fun ShortOverlayUI(
@@ -77,7 +77,7 @@ fun ShortOverlayUI(
                 .align(Alignment.BottomStart)
                 .padding(end = 72.dp)
         ) {
-            Text(
+            IGText(
                 text = title,
                 color = LocalColors.current.white,
                 style = LocalTypography.current.body1,
@@ -85,7 +85,7 @@ fun ShortOverlayUI(
                 maxLines = 1
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(
+            IGText(
                 text = description,
                 color = LocalColors.current.white,
                 style = LocalTypography.current.body1,

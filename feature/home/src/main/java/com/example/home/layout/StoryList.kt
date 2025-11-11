@@ -1,6 +1,5 @@
 package com.example.home.layout
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,10 +26,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
 import com.example.model.ui.StoryItem
+import com.example.ui.component.IGImage
+import com.example.ui.component.IGText
 import com.example.resource.R as ResourceR
 
 @Composable
@@ -75,7 +74,7 @@ fun OwnStoryItem(story: StoryItem) {
                     )
                     .padding(6.dp)
             ) {
-                AsyncImage(
+                IGImage(
                     model = story.profileImageUrl,
                     contentDescription = "Story thumbnail",
                     modifier = Modifier
@@ -97,7 +96,7 @@ fun OwnStoryItem(story: StoryItem) {
                     )
                     .border(1.dp, color = LocalColors.current.lightGray, shape = CircleShape)
             ) {
-                Image(
+                IGImage(
                     painter = painterResource(ResourceR.drawable.plus),
                     contentDescription = "Add Story",
                     modifier = Modifier.align(Alignment.Center),
@@ -107,7 +106,7 @@ fun OwnStoryItem(story: StoryItem) {
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        Text(
+        IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
             text = story.userName,
             color = LocalColors.current.white,
@@ -141,7 +140,7 @@ fun GuestStoryItem(story: StoryItem) {
                 )
                 .padding(6.dp)
         ) {
-            AsyncImage(
+            IGImage(
                 model = story.profileImageUrl,
                 contentDescription = "Story thumbnail",
                 modifier = Modifier
@@ -152,7 +151,7 @@ fun GuestStoryItem(story: StoryItem) {
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
-        Text(
+        IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
             text = story.userName,
             color = LocalColors.current.white,

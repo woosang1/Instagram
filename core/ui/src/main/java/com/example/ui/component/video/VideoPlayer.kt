@@ -48,9 +48,9 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
-import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
 import com.example.ui.component.licenseUrl
+import com.example.ui.component.IGImage
 import kotlinx.coroutines.delay
 import com.example.resource.R as ResourceR
 import androidx.compose.ui.unit.IntOffset
@@ -199,7 +199,7 @@ fun VideoPlayer(
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
-                AsyncImage(
+                IGImage(
                     modifier = Modifier.fillMaxSize(),
                     model = thumbnailsUrl,
                     contentDescription = "Thumbnail",
@@ -209,7 +209,7 @@ fun VideoPlayer(
             }
         }
         else{
-            AsyncImage(
+            IGImage(
                 modifier = Modifier.fillMaxSize(),
                 model = thumbnailsUrl,
                 contentDescription = "Thumbnail",
@@ -285,7 +285,7 @@ fun VideoPlayer(
                             .border(1.dp, LocalColors.current.white, RoundedCornerShape(8.dp))
                             .align(Alignment.TopStart)
                     ) {
-                        AsyncImage(
+                        IGImage(
                             model = previewUrl,
                             contentDescription = "Thumbnail Preview",
                             contentScale = ContentScale.Crop,

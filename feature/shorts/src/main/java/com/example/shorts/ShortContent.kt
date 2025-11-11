@@ -14,7 +14,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.example.designsystem.theme.LocalColors
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
@@ -23,6 +22,7 @@ import com.example.shorts.common.ShortsState
 import com.example.shorts.common.ShortsUiState
 import com.example.ui.component.content.ContentVideo
 import com.example.ui.component.content.VideoTitle
+import com.example.ui.component.IGImage
 import com.example.utils.extension.getHeightDisplay
 import com.example.utils.extension.pxToDp
 import com.example.utils.log.DebugLog
@@ -74,7 +74,7 @@ internal fun ShortView(
         if (isSelectPage) {
             when (thumbnails) {
                 is MediaItem.Image -> {
-                    AsyncImage(
+                    IGImage(
                         modifier = Modifier
                             .fillMaxSize(),
                         model = thumbnails.imageUrl,
@@ -103,7 +103,7 @@ internal fun ShortView(
                 is MediaItem.Image -> thumbnails.imageUrl
                 is MediaItem.Video -> thumbnails.thumbnailsUrl
             }
-            AsyncImage(
+            IGImage(
                 modifier = Modifier
                     .fillMaxSize(),
                 model = imageUrl,
