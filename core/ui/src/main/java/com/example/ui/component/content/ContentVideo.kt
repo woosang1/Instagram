@@ -30,6 +30,7 @@ import com.example.designsystem.theme.LocalTypography
 import com.example.ui.component.IGImage
 import com.example.ui.component.IGText
 import com.example.ui.component.video.VideoPlayer
+import com.example.ui.component.video.VideoPlayerConfig
 import com.example.utils.extension.noRippleClickable
 import kotlinx.coroutines.delay
 import com.example.resource.R as ResourceR
@@ -43,6 +44,7 @@ fun ContentVideo(
     isMute: Boolean = false,
     videoTitle: VideoTitle = VideoTitle.NONE,
     onClickVideoEvent: () -> Unit,
+    playerConfig: VideoPlayerConfig = VideoPlayerConfig.Default,
     onClickBackIcon: () -> Unit = {},
 ) {
     var previousIsMute by remember { mutableStateOf(isMute) }
@@ -67,7 +69,8 @@ fun ContentVideo(
             videoUrl = videoUrl,
             isAutoPlay = isAutoPlay,
             isMute = isMute,
-            isShowProcessBar = true
+            isShowProcessBar = true,
+            config = playerConfig
         )
 
         when(videoTitle){
