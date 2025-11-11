@@ -40,11 +40,17 @@ android {
 
 dependencies {
     implementation(project(":feature:home"))
+    implementation(project(":feature:home-api"))
     implementation(project(":feature:shorts"))
+    implementation(project(":feature:shorts-api"))
     implementation(project(":feature:upload"))
+    implementation(project(":feature:upload-api"))
     implementation(project(":feature:search"))
+    implementation(project(":feature:search-api"))
     implementation(project(":feature:myPage"))
+    implementation(project(":feature:myPage-api"))
     implementation(project(":feature:videoDetail"))
+    implementation(project(":feature:videoDetail-api"))
 
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))

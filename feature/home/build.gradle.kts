@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:home-api"))
     implementation(project(":feature:videoDetail"))
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))

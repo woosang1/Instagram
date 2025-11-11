@@ -14,7 +14,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.toRoute
 import com.example.designsystem.theme.LocalColors
+import com.example.home.api.HomeDestination
+import com.example.mypage.api.MyPageDestination
 import com.example.navigation.MainRoute
+import com.example.search.api.SearchDestination
+import com.example.shorts.api.ShortsDestination
+import com.example.upload.api.UploadDestination
+import com.example.videodetail.api.VideoDetailDestination
 
 @Composable
 fun MainScreen() {
@@ -25,15 +31,15 @@ fun MainScreen() {
     Scaffold(
         bottomBar = {
             BottomNavigationBar(
-                currentRoute = currentBackStackEntry?.toRoute() ?: MainRoute.Home,
+                currentRoute = currentBackStackEntry?.toRoute() ?: HomeDestination,
                 onTabSelected = { route ->
                     when (route) {
-                        is MainRoute.Home -> mainNavigator.navigateHome()
-                        is MainRoute.Search -> mainNavigator.navigateSearch()
-                        is MainRoute.Upload -> mainNavigator.navigateUpload()
-                        is MainRoute.Shorts -> mainNavigator.navigateShorts()
-                        is MainRoute.MyPage -> mainNavigator.navigateMyPage()
-                        is MainRoute.VideoDetail -> Unit
+                        is HomeDestination -> mainNavigator.navigateHome()
+                        is SearchDestination -> mainNavigator.navigateSearch()
+                        is UploadDestination -> mainNavigator.navigateUpload()
+                        is ShortsDestination -> mainNavigator.navigateShorts()
+                        is MyPageDestination -> mainNavigator.navigateMyPage()
+                        is VideoDetailDestination -> Unit
                     }
                 }
             )

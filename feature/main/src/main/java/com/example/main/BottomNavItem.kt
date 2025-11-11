@@ -1,6 +1,11 @@
 package com.example.main
 
+import com.example.home.api.HomeDestination
+import com.example.mypage.api.MyPageDestination
 import com.example.navigation.MainRoute
+import com.example.search.api.SearchDestination
+import com.example.shorts.api.ShortsDestination
+import com.example.upload.api.UploadDestination
 import com.example.resource.R as ResourceR
 
 data class BottomNavItem(
@@ -9,9 +14,9 @@ data class BottomNavItem(
 )
 
 val bottomNavItems = listOf(
-    BottomNavItem(MainRoute.Home, ResourceR.drawable.home),
-    BottomNavItem(MainRoute.Search, ResourceR.drawable.search),
-    BottomNavItem(MainRoute.Upload, ResourceR.drawable.plus),
-    BottomNavItem(MainRoute.Shorts, ResourceR.drawable.video),
-    BottomNavItem(MainRoute.MyPage, ResourceR.drawable.home)
+    BottomNavItem(HomeDestination, ResourceR.drawable.home),
+    BottomNavItem(SearchDestination, ResourceR.drawable.search),
+    BottomNavItem(UploadDestination, ResourceR.drawable.plus),
+    BottomNavItem(ShortsDestination, ResourceR.drawable.video),
+    BottomNavItem(MyPageDestination, ResourceR.drawable.home)
 )

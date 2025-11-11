@@ -6,21 +6,20 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.navigation.MainRoute
 import com.example.utils.log.DebugLog
 import com.example.videodetail.VideoDetailRoute
+import com.example.videodetail.api.VideoDetailDestination
 
-fun NavController.navigationVideoDetail(){
+fun NavController.navigationVideoDetail() {
     DebugLog(" NavController.navigationVideoDetail!!!!")
-    navigate(route = MainRoute.VideoDetail)
-
+    navigate(route = VideoDetailDestination)
 }
 
 fun NavGraphBuilder.videoDetailNavGraph(
     onBackEvent: () -> Unit
 ) {
     DebugLog(" videoDetailNavGraph !!! ")
-    composable<MainRoute.VideoDetail>(
+    composable<VideoDetailDestination>(
         enterTransition = {
             slideInHorizontally(
                 initialOffsetX = { it },  // 화면이 왼쪽에서 오른쪽으로 슬라이드

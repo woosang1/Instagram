@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":feature:videoDetail-api"))
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:utils"))
