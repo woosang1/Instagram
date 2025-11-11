@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import coil.size.Size
 
 /**
  * Project-wide image component that centralises image loading logic.
@@ -107,7 +106,6 @@ fun IGImage(
                 ImageRequest.Builder(context)
                     .data(model)
                     .crossfade(true)
-                    .size(Size.ORIGINAL)
                     .build()
             }
 

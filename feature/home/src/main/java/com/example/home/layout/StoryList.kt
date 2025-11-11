@@ -45,7 +45,10 @@ fun StoryList(
         contentPadding = PaddingValues(horizontal = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        itemsIndexed(stories) { index, story ->
+        itemsIndexed(
+            items = stories,
+            key = { _, story -> story.id }
+        ) { index, story ->
             if (index == 0) {
                 // 첫 번째 항목: 자신의 계정 + 버튼
                 OwnStoryItem(story)

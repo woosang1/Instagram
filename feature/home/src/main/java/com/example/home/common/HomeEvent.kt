@@ -10,5 +10,6 @@ sealed interface HomeEvent : Event {
         val mediaId: String,
     ) : HomeEvent
     data object Refresh : HomeEvent
+    data object LoadNextPage : HomeEvent
 }
 
