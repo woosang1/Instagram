@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
@@ -55,7 +56,7 @@ fun ShortsGridLayout(
                             is MediaItem.Video -> firstItem.thumbnailsUrl
                             is MediaItem.Image -> firstItem.imageUrl
                         },
-                        contentDescription = "Image",
+                        contentDescription = stringResource(id = R.string.content_description_image),
                         contentScale = ContentScale.Crop,
                         placeholder = painterResource(R.drawable.placeholder)
                     )
@@ -63,15 +64,14 @@ fun ShortsGridLayout(
                         modifier = Modifier
                             .size(28.dp)
                             .align(Alignment.TopEnd)
-                            .padding(2.dp)
-                        ,
+                            .padding(2.dp),
                         painter = painterResource(
                             when (firstItem) {
                                 is MediaItem.Video -> R.drawable.video
                                 is MediaItem.Image -> R.drawable.page
                             }
                         ),
-                        contentDescription = "type",
+                        contentDescription = stringResource(id = R.string.content_description_media_type),
                         contentScale = ContentScale.Crop,
                     )
                 }

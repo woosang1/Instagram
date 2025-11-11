@@ -13,10 +13,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
+import com.example.resource.R as ResourceR
 import com.example.ui.component.IGText
 
 @Composable
@@ -35,7 +37,7 @@ fun HeaderLayout(
     {
         IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
-            text = "Instagram",
+            text = stringResource(id = ResourceR.string.home_header_title),
             color = LocalColors.current.white,
             style = LocalTypography.current.headline2,
             maxLines = 1,
@@ -48,14 +50,14 @@ fun HeaderLayout(
             IconButton(onClick = onClickLike) {
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Like",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_like_button),
                     tint = LocalColors.current.white
                 )
             }
             IconButton(onClick = onClickShare) {
                 Icon(
                     imageVector = Icons.Default.Send,
-                    contentDescription = "Share",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_share_button),
                     tint = LocalColors.current.white
                 )
             }

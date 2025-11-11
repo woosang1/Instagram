@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
@@ -90,6 +91,11 @@ fun ContentVideo(
             exit = fadeOut(),
             modifier = Modifier.align(Alignment.Center)
         ) {
+            val indicatorDescription = if (isMute) {
+                stringResource(id = ResourceR.string.content_description_muted)
+            } else {
+                stringResource(id = ResourceR.string.content_description_unmuted)
+            }
             IGImage(
                 modifier = Modifier
                     .size(64.dp)
@@ -97,7 +103,7 @@ fun ContentVideo(
                 painter = painterResource(
                     id = if (isMute) ResourceR.drawable.mute_on else ResourceR.drawable.mute_off
                 ),
-                contentDescription = if (isMute) "Muted" else "Unmuted",
+                contentDescription = indicatorDescription,
             )
         }
     }
@@ -118,14 +124,14 @@ fun HeaderLayoutWithBackIcon(
         IconButton(onClick = onClickBackIcon) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Like",
+                contentDescription = stringResource(id = ResourceR.string.content_description_back_button),
                 tint = LocalColors.current.white
             )
         }
 
         IGText(
             modifier = Modifier.padding(start = 12.dp),
-            text = "릴스",
+            text = stringResource(id = ResourceR.string.video_label_reels),
             color = LocalColors.current.white,
             style = LocalTypography.current.headline2,
             maxLines = 1,
@@ -147,7 +153,7 @@ fun HeaderLayoutWithTitle(
     {
         IGText(
             modifier = Modifier.padding(horizontal = 12.dp),
-            text = "릴스",
+            text = stringResource(id = ResourceR.string.video_label_reels),
             color = LocalColors.current.white,
             style = LocalTypography.current.headline2,
             maxLines = 1,

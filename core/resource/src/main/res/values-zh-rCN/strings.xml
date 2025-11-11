@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="home_header_title">Instagram</string>
+
+    <string name="action_like">点赞</string>
+    <string name="action_comment">评论</string>
+    <string name="action_share">分享</string>
+    <string name="action_next">下一步</string>
+
+    <string name="search_hint_text">搜索</string>
+    <string name="video_label_reels">Reels</string>
+    <string name="toast_refresh_completed">刷新已完成</string>
+    <string name="toast_permission_granted">权限已授予</string>
+    <string name="toast_permission_denied">权限被拒绝</string>
+    <string name="toast_photo_selected">已选择照片</string>
+
+    <string name="content_description_search_icon">搜索图标</string>
+    <string name="content_description_story_thumbnail">快拍缩略图</string>
+    <string name="content_description_add_story">添加快拍</string>
+    <string name="content_description_short_thumbnail">短视频缩略图</string>
+    <string name="content_description_short_image">短视频封面</string>
+    <string name="content_description_image">图片</string>
+    <string name="content_description_media_type">内容类型指示</string>
+    <string name="content_description_like_button">点赞按钮</string>
+    <string name="content_description_back_button">返回按钮</string>
+    <string name="content_description_share_button">分享按钮</string>
+    <string name="content_description_comment_button">评论按钮</string>
+    <string name="content_description_more">更多选项</string>
+    <string name="content_description_channel_thumbnail">频道缩略图</string>
+    <string name="content_description_thumbnail">缩略图</string>
+    <string name="content_description_thumbnail_preview">缩略图预览</string>
+    <string name="content_description_muted">已静音</string>
+    <string name="content_description_unmuted">已取消静音</string>
+
+    <string name="text_view_count_likes">%1$s 次点赞</string>
+    <string name="text_pager_indicator">%1$d / %2$d</string>
+</resources>
+

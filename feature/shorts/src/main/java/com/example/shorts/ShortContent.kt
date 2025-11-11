@@ -15,17 +15,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
+import com.example.resource.R as ResourceR
 import com.example.shorts.common.ShortsEvent
 import com.example.shorts.common.ShortsState
 import com.example.shorts.common.ShortsUiState
 import com.example.ui.component.IGImage
 import com.example.ui.component.content.ContentVideo
 import com.example.ui.component.content.VideoTitle
-import com.example.resource.R as ResourceR
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -90,7 +91,7 @@ private fun ShortsPagerItem(
                 } else {
                     IGImage(
                         model = media.thumbnailsUrl,
-                        contentDescription = "Short thumbnail",
+                        contentDescription = stringResource(id = ResourceR.string.content_description_short_thumbnail),
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop,
                         placeholder = painterResource(ResourceR.drawable.placeholder)
@@ -101,7 +102,7 @@ private fun ShortsPagerItem(
             is MediaItem.Image -> {
                 IGImage(
                     model = media.imageUrl,
-                    contentDescription = "Short image",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_short_image),
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop,
                     placeholder = painterResource(ResourceR.drawable.placeholder)

@@ -12,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
-import com.example.ui.component.IGImage
 import com.example.resource.R
+import com.example.ui.component.IGImage
 
 @Composable
 fun VolumeToggleButton(
@@ -35,7 +36,7 @@ fun VolumeToggleButton(
                 .fillMaxSize()
                 .clip(CircleShape),
             painter = painterResource(id = if(isMuted) R.drawable.mute_on else R.drawable.mute_off),
-            contentDescription = "Channel Thumbnail",
+            contentDescription = stringResource(id = R.string.content_description_channel_thumbnail),
             contentScale = ContentScale.Crop,
         )
     }

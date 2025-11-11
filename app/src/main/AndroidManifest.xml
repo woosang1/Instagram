@@ -5,7 +5,7 @@
     <application
         android:name="com.example.instagram.main.InstagramApplication"
         android:icon="@mipmap/app_icon"
-        android:label="Instagram"
+        android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
     </application>

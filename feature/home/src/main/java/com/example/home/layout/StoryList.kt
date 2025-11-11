@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
@@ -79,7 +80,7 @@ fun OwnStoryItem(story: StoryItem) {
             ) {
                 IGImage(
                     model = story.profileImageUrl,
-                    contentDescription = "Story thumbnail",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_story_thumbnail),
                     modifier = Modifier
                         .fillMaxSize()
                         .clip(CircleShape),
@@ -101,7 +102,7 @@ fun OwnStoryItem(story: StoryItem) {
             ) {
                 IGImage(
                     painter = painterResource(ResourceR.drawable.plus),
-                    contentDescription = "Add Story",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_add_story),
                     modifier = Modifier.align(Alignment.Center),
                 )
             }
@@ -145,7 +146,7 @@ fun GuestStoryItem(story: StoryItem) {
         ) {
             IGImage(
                 model = story.profileImageUrl,
-                contentDescription = "Story thumbnail",
+                contentDescription = stringResource(id = ResourceR.string.content_description_story_thumbnail),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(CircleShape),

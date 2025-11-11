@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
@@ -84,7 +85,7 @@ fun ContentFeed(
                         .fillMaxSize()
                         .clip(CircleShape),
                     model = contentInfo.profileUrl,
-                    contentDescription = "Channel Thumbnail",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_channel_thumbnail),
                     contentScale = ContentScale.Crop
                 )
             }
@@ -102,7 +103,7 @@ fun ContentFeed(
             IconButton(onClick = { }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
-                    contentDescription = "More",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_more),
                     tint = LocalColors.current.gray
                 )
             }
@@ -126,21 +127,21 @@ fun ContentFeed(
             IconButton(onClick = onLikeClick) {
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
-                    contentDescription = "Like",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_like_button),
                     tint = LocalColors.current.white
                 )
             }
             IconButton(onClick = onCommentClick) {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = "Comment",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_comment_button),
                     tint = LocalColors.current.white
                 )
             }
             IconButton(onClick = onShareClick) {
                 Icon(
                     imageVector = Icons.Default.Send,
-                    contentDescription = "Share",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_share_button),
                     tint = LocalColors.current.white
                 )
             }
@@ -148,7 +149,7 @@ fun ContentFeed(
 
         // 좋아요 수
         IGText(
-            text = "${contentInfo.viewCount} likes",
+            text = stringResource(id = ResourceR.string.text_view_count_likes, contentInfo.viewCount),
             color = LocalColors.current.white,
             style = LocalTypography.current.body1,
             modifier = Modifier.padding(horizontal = 12.dp)
@@ -203,7 +204,7 @@ internal fun MediaHorizontalPager(
                         IGImage(
                             modifier = Modifier.fillMaxSize(),
                             model = media.imageUrl,
-                            contentDescription = "Image",
+                            contentDescription = stringResource(id = ResourceR.string.content_description_image),
                             contentScale = ContentScale.Crop,
                             placeholder = painterResource(ResourceR.drawable.placeholder)
                         )
@@ -245,7 +246,11 @@ internal fun MediaHorizontalPager(
                     shape = CircleShape
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp),
-            text = "${pagerState.currentPage + 1} / ${mediaItems.size}",
+            text = stringResource(
+                id = ResourceR.string.text_pager_indicator,
+                pagerState.currentPage + 1,
+                mediaItems.size
+            ),
             color = LocalColors.current.white,
             style = LocalTypography.current.body1
         )

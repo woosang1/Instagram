@@ -17,9 +17,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
+import com.example.resource.R as ResourceR
 import com.example.ui.component.IGText
 
 @Composable
@@ -46,7 +48,7 @@ fun ShortOverlayUI(
             IconButton(onClick = onLikeClick) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
-                    contentDescription = "Like",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_like_button),
                     tint = LocalColors.current.white,
                     modifier = Modifier.size(32.dp)
                 )
@@ -55,7 +57,7 @@ fun ShortOverlayUI(
             IconButton(onClick = onCommentClick) {
                 Icon(
                     imageVector = Icons.Default.Check,
-                    contentDescription = "Comment",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_comment_button),
                     tint = LocalColors.current.white,
                     modifier = Modifier.size(32.dp)
                 )
@@ -64,7 +66,7 @@ fun ShortOverlayUI(
             IconButton(onClick = onShareClick) {
                 Icon(
                     imageVector = Icons.Default.Share,
-                    contentDescription = "Share",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_share_button),
                     tint = LocalColors.current.white,
                     modifier = Modifier.size(32.dp)
                 )

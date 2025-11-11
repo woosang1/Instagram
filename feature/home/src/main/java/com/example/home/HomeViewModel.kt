@@ -12,6 +12,7 @@ import com.example.home.common.testStoryList
 import com.example.model.ui.ContentInfo
 import com.example.model.ui.MediaItem
 import com.example.utils.FeatureErrorHandler
+import com.example.resource.R as ResourceR
 import com.example.utils.log.DebugLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -74,7 +75,7 @@ class HomeViewModel @Inject constructor(
             }
             is HomeEvent.Refresh -> {
                 loadInitial()
-                setEffect(HomeSideEffect.ShowToast("새로고침 완료"))
+                setEffect(HomeSideEffect.ShowToast(ResourceR.string.toast_refresh_completed))
             }
             is HomeEvent.LoadNextPage -> {
                 loadNextPage()

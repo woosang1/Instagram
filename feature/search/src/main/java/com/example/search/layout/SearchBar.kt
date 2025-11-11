@@ -14,9 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.designsystem.theme.LocalColors
 import com.example.designsystem.theme.LocalTypography
+import com.example.resource.R as ResourceR
 import com.example.ui.component.IGText
 
 @Composable
@@ -42,7 +44,7 @@ fun SearchBar(
                     .padding(horizontal = 8.dp)
                     .align(Alignment.CenterVertically),
                 imageVector = Icons.Default.Search,
-                contentDescription = "Search Icon",
+                contentDescription = stringResource(id = ResourceR.string.content_description_search_icon),
                 tint = Color.Gray,
             )
             BasicTextField(
@@ -56,7 +58,7 @@ fun SearchBar(
                 decorationBox = { innerTextField ->
                     if (query.isEmpty()) {
                         IGText(
-                            text = "검색",
+                            text = stringResource(id = ResourceR.string.search_hint_text),
                             color = Color.Gray,
                             style = LocalTypography.current.headline2,
                             modifier = Modifier.align(Alignment.CenterVertically)

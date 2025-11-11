@@ -28,7 +28,7 @@ fun HomeRoute(
                     onStartVideoDetail()
                 }
                 is HomeSideEffect.ShowToast -> {
-                    context.showToast(effect.message)
+                    context.showToast(context.getString(effect.messageResId))
                 }
             }
         }

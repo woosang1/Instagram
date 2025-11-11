@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="home_header_title">Instagram</string>
+
+    <string name="action_like">いいね</string>
+    <string name="action_comment">コメント</string>
+    <string name="action_share">共有</string>
+    <string name="action_next">次へ</string>
+
+    <string name="search_hint_text">検索</string>
+    <string name="video_label_reels">リール</string>
+    <string name="toast_refresh_completed">更新が完了しました</string>
+    <string name="toast_permission_granted">権限が許可されました</string>
+    <string name="toast_permission_denied">権限が拒否されました</string>
+    <string name="toast_photo_selected">写真を選択しました</string>
+
+    <string name="content_description_search_icon">検索アイコン</string>
+    <string name="content_description_story_thumbnail">ストーリーのサムネイル</string>
+    <string name="content_description_add_story">ストーリーを追加</string>
+    <string name="content_description_short_thumbnail">ショートのサムネイル</string>
+    <string name="content_description_short_image">ショート画像</string>
+    <string name="content_description_image">画像</string>
+    <string name="content_description_media_type">コンテンツ種別アイコン</string>
+    <string name="content_description_like_button">いいねボタン</string>
+    <string name="content_description_back_button">戻るボタン</string>
+    <string name="content_description_share_button">共有ボタン</string>
+    <string name="content_description_comment_button">コメントボタン</string>
+    <string name="content_description_more">その他のオプション</string>
+    <string name="content_description_channel_thumbnail">チャンネルサムネイル</string>
+    <string name="content_description_thumbnail">サムネイル</string>
+    <string name="content_description_thumbnail_preview">サムネイルプレビュー</string>
+    <string name="content_description_muted">ミュート</string>
+    <string name="content_description_unmuted">ミュート解除</string>
+
+    <string name="text_view_count_likes">%1$s 件のいいね</string>
+    <string name="text_pager_indicator">%1$d / %2$d</string>
+</resources>
+

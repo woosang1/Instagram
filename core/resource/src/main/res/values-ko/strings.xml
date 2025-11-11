@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="home_header_title">Instagram</string>
+
+    <string name="action_like">좋아요</string>
+    <string name="action_comment">댓글</string>
+    <string name="action_share">공유</string>
+    <string name="action_next">다음</string>
+
+    <string name="search_hint_text">검색</string>
+    <string name="video_label_reels">릴스</string>
+    <string name="toast_refresh_completed">새로고침 완료</string>
+    <string name="toast_permission_granted">권한이 허용되었습니다.</string>
+    <string name="toast_permission_denied">권한이 거부되었습니다.</string>
+    <string name="toast_photo_selected">사진을 선택했습니다.</string>
+
+    <string name="content_description_search_icon">검색 아이콘</string>
+    <string name="content_description_story_thumbnail">스토리 썸네일</string>
+    <string name="content_description_add_story">스토리 추가</string>
+    <string name="content_description_short_thumbnail">숏츠 썸네일</string>
+    <string name="content_description_short_image">숏츠 이미지</string>
+    <string name="content_description_image">이미지</string>
+    <string name="content_description_media_type">콘텐츠 유형 아이콘</string>
+    <string name="content_description_like_button">좋아요 버튼</string>
+    <string name="content_description_back_button">뒤로 가기 버튼</string>
+    <string name="content_description_share_button">공유 버튼</string>
+    <string name="content_description_comment_button">댓글 버튼</string>
+    <string name="content_description_more">더보기</string>
+    <string name="content_description_channel_thumbnail">채널 썸네일</string>
+    <string name="content_description_thumbnail">썸네일</string>
+    <string name="content_description_thumbnail_preview">썸네일 미리보기</string>
+    <string name="content_description_muted">음소거됨</string>
+    <string name="content_description_unmuted">음소거 해제</string>
+
+    <string name="text_view_count_likes">%1$s개의 좋아요</string>
+    <string name="text_pager_indicator">%1$d / %2$d</string>
+</resources>
+

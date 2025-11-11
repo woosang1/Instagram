@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.designsystem.theme.LocalColors
-import com.example.upload.layout.InstagramGalleryPicker
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,7 +20,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.designsystem.theme.LocalColors
+import com.example.resource.R as ResourceR
 import com.example.ui.component.IGImage
+import com.example.upload.layout.InstagramGalleryPicker
 import com.example.utils.extension.showToast
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -34,7 +35,7 @@ fun UploadScreen(
 
     val onImageSelected: (Uri) -> Unit = { uri ->
         selectedImageUri = uri
-        context.showToast("사진 선택")
+        context.showToast(context.getString(ResourceR.string.toast_photo_selected))
     }
 
     Box(

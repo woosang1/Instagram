@@ -36,6 +36,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.Lifecycle
@@ -202,7 +203,7 @@ fun VideoPlayer(
                 IGImage(
                     modifier = Modifier.fillMaxSize(),
                     model = thumbnailsUrl,
-                    contentDescription = "Thumbnail",
+                    contentDescription = stringResource(id = ResourceR.string.content_description_thumbnail),
                     contentScale = ContentScale.Crop,
                     placeholder = painterResource(ResourceR.drawable.placeholder)
                 )
@@ -212,7 +213,7 @@ fun VideoPlayer(
             IGImage(
                 modifier = Modifier.fillMaxSize(),
                 model = thumbnailsUrl,
-                contentDescription = "Thumbnail",
+                contentDescription = stringResource(id = ResourceR.string.content_description_thumbnail),
                 contentScale = ContentScale.Crop,
                 placeholder = painterResource(ResourceR.drawable.placeholder)
             )
@@ -287,7 +288,7 @@ fun VideoPlayer(
                     ) {
                         IGImage(
                             model = previewUrl,
-                            contentDescription = "Thumbnail Preview",
+                            contentDescription = stringResource(id = ResourceR.string.content_description_thumbnail_preview),
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxSize()
                         )
