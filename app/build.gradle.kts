@@ -52,6 +52,7 @@ android {
 dependencies {
     implementation(project(":feature:main"))
     implementation(project(":core:resource"))
+    implementation(project(":app-config:app-config"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
